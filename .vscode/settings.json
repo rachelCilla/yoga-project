@@ -1,0 +1,15 @@
+{
+    "css.completion.completePropertyWithSemicolon": false,
+    "less.completion.completePropertyWithSemicolon": false,
+    "scss.completion.completePropertyWithSemicolon": false,
+    "github.copilot.enable": {
+
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "javascript.format.insertSemicolons": false
+    },
+    "vscode-pets.theme": "none",
+    "vscode-pets.petColor": "white"
+}

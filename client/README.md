@@ -68,3 +68,19 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+<!-- RACHEL'S SELF GUIDE -->
+Yoga API https://github.com/alexcumplido/yoga-api
+Bhuddha API (quotes) https://buddha-api.com/today
+
+1. created client (frontend)
+2. created server (backend)
+2.5 - set up postgres database 
+3. server.js - set up express, port, app.get('/favorite_poses'
+4. db.js- require pg, set up dotenv connection
+5. .env- created 
+
+
