@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+// children
 import ChosenCategoryPoseList from './ChosenCategoryPoseList';
 
-export default function PoseCategoryCard({ categories }) {
+export default function PosesByCategory({ categories }) {
   const [showPoseList, setShowPoseList] = useState(false);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
 
   const handleButtonClick = (categoryIndex) => {
     setShowPoseList(!showPoseList);
-    setSelectedCategoryIndex(categoryIndex);
+    setSelectedCategoryIndex(categoryIndex)
   };
 
+  
   return (
     <div className='pose-category-card'>
       {categories &&

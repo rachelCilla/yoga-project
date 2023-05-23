@@ -3,9 +3,11 @@ import './App.css';
 import Navbar from './components/Nav.js';
 import Introduction from './components/Introduction';
 import Learn from './components/Learn';
-import PoseCategories from './components/PoseCategories';
+import PosesByCategory from './components/poses/PosesByCategory';
+import PosesByDifficulty from './components/poses/PosesByDifficulty';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
+
 
 function App() {
   const userEmail = 'test@test.com';
@@ -42,11 +44,17 @@ function App() {
       });
   }, []);
 
+
+
+  // RETURN-------------------------------------------------------------------
   return (
     <div className="App">
       <Navbar />
       <Introduction />
-      <PoseCategories categories={categories} />
+      <div className='pose-options-parent'>
+      <PosesByCategory categories={categories} />
+      <PosesByDifficulty categories={categories} />
+      </div>
       {/* {sortedFavoritePoses?.map((favoritePose)=><FavoritePosesList key={favoritePose.id} favoritePose={favoritePose} />)} */}
       <Learn />
     </div>

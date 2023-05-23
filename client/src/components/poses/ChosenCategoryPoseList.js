@@ -1,4 +1,5 @@
 import React from 'react';
+// children
 import PosesCard from './PosesCard';
 
 export default function ChosenCategoryPoseList({ handleBackButtonClick, categories, categoryIndex }) {
@@ -10,7 +11,10 @@ export default function ChosenCategoryPoseList({ handleBackButtonClick, categori
       {poses.map(pose => (
         <div key={pose.id}>
 
-          <PosesCard poseName={pose.english_name} poseImg={pose.url_png} poseBenefits={pose.pose_benefits}/>
+          <PosesCard
+          categories={categories} categoryIndex={categoryIndex} pose={pose}
+          //  poseName={pose.english_name} poseImg={pose.url_png} poseBenefits={pose.pose_benefits}
+           />
         </div>
       ))}
      
