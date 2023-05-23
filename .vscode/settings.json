@@ -10,6 +10,6 @@
         "scminput": false,
         "javascript.format.insertSemicolons": false
     },
-    "vscode-pets.theme": "none",
+    "vscode-pets.theme": "beach",
     "vscode-pets.petColor": "white"
 }
