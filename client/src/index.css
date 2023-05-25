@@ -89,13 +89,19 @@ button{
   background-color: transparent;
 
 }
+/* check bootstrap conflicting */
+.poses-card{
+  background-color: rgb(202, 221, 254); 
+  max-width: 30vw;
 
-.pose-card{
-  background-color: rgb(255, 240, 242); 
-  width: 100%;
   margin: 10px 0;
   border-radius: 10px;
+  border: 5px solid rgb(113, 113, 248);
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 0 1px;
+  font-size: .8rem;
+}
+.poses-card img{
+  max-width: 30%;
 }
 
 /* LEARN */
@@ -106,18 +112,29 @@ button{
 .pose-categories{
   background-color: lightgoldenrodyellow;
   padding: 20px;
-width: 50%;
+width: 30%;
 }
 
 .poses-by-difficulty{
-  width: 50%;
+  width: 32%;
   height: 100%;
   background-color: rgb(229, 244, 222);
+}
+
+.poses-by-benefit{
+  width: 32%;
+  height: 100%;
+  background-color: rgb(255, 214, 255);
+}
+.pose-difficulty-card{
+  padding: 40px;
+  border: 15px solid rgb(149, 0, 186);
+  background-color: rgb(255, 214, 255);
 }
 .pose-options-parent{
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start ;
   flex-wrap: wrap;
 }
 

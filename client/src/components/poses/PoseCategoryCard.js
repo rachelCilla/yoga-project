@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // children
 import ChosenCategoryPoseList from './ChosenCategoryPoseList';
 
-export default function PosesByCategory({ categories }) {
+export default function PoseCategoryCard({ categories }) {
   const [showPoseList, setShowPoseList] = useState(false);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
 
@@ -17,7 +17,7 @@ export default function PosesByCategory({ categories }) {
       {categories &&
         categories.map((category, index) => (
           <div key={category.category_name}>
-            <h3>{category.category_name}</h3>
+            {/* <h3>{category.category_name}</h3> */}
             <button onClick={() => handleButtonClick(index)}>
               Click here for {category.category_name} poses
             </button>

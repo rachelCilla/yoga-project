@@ -22,8 +22,8 @@ export default function PosesCard({categories, categoryIndex,pose}) {
 
 
   return (
-    <div>
-    <Card style={{ width: '18rem' }}>
+    <div className='poses-card'>
+    <Card >
       <Card.Img variant="top" src={pose.url_png} alt="pose image" />
       <Card.Body>
         <Card.Title>{pose.english_name}</Card.Title>
