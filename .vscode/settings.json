@@ -11,5 +11,7 @@
         "javascript.format.insertSemicolons": false
     },
     "vscode-pets.theme": "beach",
-    "vscode-pets.petColor": "white"
+    "vscode-pets.petColor": "white",
+    "prettier.tabWidth": 6,
+    "prettier.useTabs": true
 }
