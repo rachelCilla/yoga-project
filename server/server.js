@@ -70,13 +70,14 @@ app.get('/favorite_poses/:userEmail', async (req, res) => {
     const {userEmail} = req.params
     console.log(userEmail)
     try{
-        //  In the context of a PostgreSQL query, $1 is a placeholder for a parameter that will be passed to the query when it is executed.
         const favorite_poses= await pool.query('SELECT * FROM favorite_poses WHERE user_email =$1',[userEmail])
         res.json(favorite_poses.rows)
     }catch(err){
-        console.log(err)
+        console.log(err);
     }
 })
+
+
 
 // POST A FAVORITE
 app.post('/favorite_poses', async (req, res) => {
@@ -86,9 +87,10 @@ app.post('/favorite_poses', async (req, res) => {
     const id = uuidv4()
     try{
         await pool.query('INSERT INTO favorite_poses (id, user_email, pose_name, date) VALUES ($1, $2, $3, $4)', [id, user_email, pose_name, date])
-        res.sendStatus(201)
+        res.status(201).json({ message: 'Created' });
+        
     }catch(err){
-        console.log(err)
+        res.status(500).json({ detail: 'Failed to add favorite pose' });
     }
 })
 

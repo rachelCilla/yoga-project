@@ -10,6 +10,8 @@ export default function PosesCard({ pose }) {
   const [poseData, setPoseData] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(null);
+  const [addedToFavorites, setAddedToFavorites] = useState(false);
+  const [error, setError] = useState(null);
 
   const openMoreInfo = () => {
     setShowMoreInfo(true);
@@ -19,16 +21,22 @@ export default function PosesCard({ pose }) {
     setShowMoreInfo(false);
   };
 
-  const addToFavorites = async (poseName) => {
+  const addToFavorites = async (pose_name) => {
     const user_email = cookies.Email;
     const date = new Date();
-    const response = await fetch(`{process.env.REACT_APP_API_URL}/favorite_poses`, {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/favorite_poses`, {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({poseName,user_email,date}) 
+      body: JSON.stringify({user_email,pose_name, date}) 
     })
-    
+
     const data = await response.json()
+
+    if (data.detail ){
+      setError(data.detail)
+    }else{
+      setAddedToFavorites(true)
+    }
   }
 
   useEffect(() => {
@@ -77,14 +85,15 @@ export default function PosesCard({ pose }) {
         <Card.Body>
           <Card.Title>{poseEnglishName}</Card.Title>
           <Card.Text>{poseBenefits}</Card.Text>
-          <Button variant="primary" onClick={()=>addToFavorites(poseEnglishName)}>Add to Favorites</Button>{" "}
+          {error && <p>{error}</p>}
+          <Button variant="primary" onClick={()=>addToFavorites(poseEnglishName)}>{addedToFavorites? 'Added Successfully!': 'Add to Favorites'}</Button>
           <Button variant="secondary" onClick={openMoreInfo}>
             More Info
           </Button>
         </Card.Body>
       </Card>
       )}
-      {showMoreInfo && <MoreInfo closeMoreInfo={closeMoreInfo} pose={poses} />}
+      {showMoreInfo && <MoreInfo closeMoreInfo={closeMoreInfo} pose={poses} addToFavorites={addToFavorites} />}
     </div>
   );
 }

@@ -3,8 +3,22 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function MoreInfo({ closeMoreInfo, pose }) {
+
+
+export default function MoreInfo({ closeMoreInfo, pose, addToFavorites }) {
   const [videoId, setVideoId] = useState('');
+  const [addedToFavorites, setAddedToFavorites] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleAddToFavorites = async () => {
+    try {
+      await addToFavorites(pose.english_name);
+      setAddedToFavorites(true);
+    } catch (error) {
+      setError(error.message || 'Failed to add favorite pose');
+    }
+  };
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,10 +77,11 @@ export default function MoreInfo({ closeMoreInfo, pose }) {
         </Modal.Body>
 
         <Modal.Footer>
+          {error && <p>{error}</p>}
           <Button variant="secondary" onClick={closeMoreInfo}>
             Close
           </Button>
-          <Button variant="primary">Add to Favorites</Button>
+          <Button onClick={()=>handleAddToFavorites(pose.english_name)}variant="primary">{addedToFavorites? 'Added Successfully!': 'Add to Favorites'}</Button>
         </Modal.Footer>
       </Modal>
     </div>
