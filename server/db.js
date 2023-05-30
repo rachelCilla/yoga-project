@@ -2,9 +2,9 @@
 
 
 // from postgres documentation
-const Pool = require('pg').Pool
+const { Pool } = require('pg');
 
-require('dotenv').config()
+require('dotenv').config() 
 
 // how we are going to communicate with our postgres database
 // Pool/pg is from pg package 
@@ -12,8 +12,8 @@ const pool = new Pool({
     user: process.env.USERNAME,
     password: process.env.PASSWORD,
     host: process.env.HOST,
-    port: process.env.PORT,
-    database: 'yoga_app'
+    port: process.env.DBPORT,
+    database: process.env.DATABASE
 })
 
 {// INFO module.exports: 

@@ -1,17 +1,25 @@
 import React from 'react';
 import { useState } from 'react';
 import FavoritePosesList from './FavoritePosesList';
-import SignUp from './SignUp';
-
+// import SignUp from './SignUp';
+import { useCookies } from 'react-cookie';
 
 export default function Nav() {
 	const [showFavorites, setShowFavorites] = useState(false);
-	const [showSignUp, setShowSignUp] = useState(false);
+	const [cookies, setCookie, removeCookie] = useCookies(null);
+	// const [showSignUp, setShowSignUp] = useState(false);
 
 		// OPENING AND CLOSING MODALS-----------------------------------------------
-	const toggleSignUp = () => {
-		setShowSignUp(!showSignUp);
-	};
+	// const toggleSignUp = () => {
+	// 	setShowSignUp(!showSignUp);
+	// };
+
+	const signOut = () => {
+		removeCookie('Email');
+		removeCookie('AuthToken');
+		window.location.reload();
+	}
+
 
 	const openFavorites = () => {
 	setShowFavorites(!showFavorites);
@@ -49,10 +57,10 @@ export default function Nav() {
 			<div className='nav-items' onClick={scrollToLearn}>Learn</div>
 		</div>
 		<button onClick={openFavorites}>See my Favorites</button>
-		<button onClick={toggleSignUp}>Sign Up</button>
-		{/* <button onClick={signOut}>Sign Out</button> */}
+		{/* <button onClick={toggleSignUp}>Sign Up</button> */}
+		<button onClick={signOut}>Sign Out</button>
 		{showFavorites && <FavoritePosesList handleBackButtonClick={handleBackButtonClick} />}
-		{showSignUp && <SignUp handleClose={toggleSignUp}  />}
+		{/* {showSignUp && <SignUp handleClose={toggleSignUp}  />} */}
 	</div>
   );
 }

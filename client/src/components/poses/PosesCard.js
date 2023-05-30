@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import MoreInfo from "./MoreInfo";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 export default function PosesCard({ pose }) {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [poseData, setPoseData] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(null);
 
   const openMoreInfo = () => {
     setShowMoreInfo(true);
@@ -16,6 +18,18 @@ export default function PosesCard({ pose }) {
   const closeMoreInfo = () => {
     setShowMoreInfo(false);
   };
+
+  const addToFavorites = async (poseName) => {
+    const user_email = cookies.Email;
+    const date = new Date();
+    const response = await fetch(`{process.env.REACT_APP_API_URL}/favorite_poses`, {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({poseName,user_email,date}) 
+    })
+    
+    const data = await response.json()
+  }
 
   useEffect(() => {
     if (!pose.english_name) {
@@ -63,7 +77,7 @@ export default function PosesCard({ pose }) {
         <Card.Body>
           <Card.Title>{poseEnglishName}</Card.Title>
           <Card.Text>{poseBenefits}</Card.Text>
-          <Button variant="primary">Add to Favorites</Button>{" "}
+          <Button variant="primary" onClick={()=>addToFavorites(poseEnglishName)}>Add to Favorites</Button>{" "}
           <Button variant="secondary" onClick={openMoreInfo}>
             More Info
           </Button>
