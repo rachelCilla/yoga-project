@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import FavoritePosesList from './FavoritePosesList';
 // import SignUp from './SignUp';
@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 export default function Nav() {
 	const [showFavorites, setShowFavorites] = useState(false);
 	const [cookies, setCookie, removeCookie] = useCookies(null);
+    const [loggedIn, setLoggedIn] = useState(false);
 	// const [showSignUp, setShowSignUp] = useState(false);
 
 		// OPENING AND CLOSING MODALS-----------------------------------------------
@@ -29,7 +30,11 @@ export default function Nav() {
 	setShowFavorites(false);
 	};
 
-	
+	useEffect(() => {
+        if (cookies.Email && cookies.AuthToken) {
+            setLoggedIn(true);
+        }
+    }, [cookies]);
 
 
 
@@ -58,6 +63,8 @@ export default function Nav() {
 		</div>
 		<button onClick={openFavorites}>See my Favorites</button>
 		{/* <button onClick={toggleSignUp}>Sign Up</button> */}
+
+
 		<button onClick={signOut}>Sign Out</button>
 		{showFavorites && <FavoritePosesList handleBackButtonClick={handleBackButtonClick} />}
 		{/* {showSignUp && <SignUp handleClose={toggleSignUp}  />} */}

@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import {useCookies} from 'react-cookie'
 
@@ -11,6 +11,8 @@ export default function Auth() {
   const [email, setEmail] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
 
+
+  
   const viewLogin = (status) => {
     setError(null);
     setIsLogin(status);

@@ -4,6 +4,7 @@ import { Card, Button } from "react-bootstrap";
 import MoreInfo from "./MoreInfo";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import Auth from "../Auth";
 
 export default function PosesCard({ pose }) {
   const [showMoreInfo, setShowMoreInfo] = useState(false);
@@ -12,6 +13,25 @@ export default function PosesCard({ pose }) {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [addedToFavorites, setAddedToFavorites] = useState(false);
   const [error, setError] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [openLogin, setOpenLogin] = useState(false);
+
+    const userEmail = cookies.Email;
+
+    // check logged in
+    useEffect(() => {
+        if (cookies.Email) {
+            setLoggedIn(true);
+        } else {
+            setLoggedIn(false);
+        }}, [userEmail]);
+
+        
+// login popup
+       const loginPopup = () => {
+        setOpenLogin(true);
+       }
+
 
   const openMoreInfo = () => {
     setShowMoreInfo(true);
@@ -76,17 +96,31 @@ export default function PosesCard({ pose }) {
   const poses = poseData || pose;
 
   return (
+  
     <div className="poses-card">
+        {openLogin && <Auth/>}
+
       {isLoading ? (
         <div>Loading Poses...</div>
       ) : (
+        
       <Card>
         <Card.Img variant="top" src={poseImageUrl} alt="pose image" />
         <Card.Body>
           <Card.Title>{poseEnglishName}</Card.Title>
           <Card.Text>{poseBenefits}</Card.Text>
           {error && <p>{error}</p>}
-          <Button variant="primary" onClick={()=>addToFavorites(poseEnglishName)}>{addedToFavorites? 'Added Successfully!': 'Add to Favorites'}</Button>
+{!loggedIn &&  <Button variant="primary" onClick={loginPopup}>
+Add to Favorites
+            </Button>
+            }
+
+{ loggedIn &&
+          <Button variant="primary" onClick={()=>addToFavorites(poseEnglishName)}>
+            {addedToFavorites? 'Added Successfully!': 'Add to Favorites'}
+            </Button>
+      }
+
           <Button variant="secondary" onClick={openMoreInfo}>
             More Info
           </Button>
@@ -95,5 +129,6 @@ export default function PosesCard({ pose }) {
       )}
       {showMoreInfo && <MoreInfo closeMoreInfo={closeMoreInfo} pose={poses} addToFavorites={addToFavorites} />}
     </div>
+  
   );
 }

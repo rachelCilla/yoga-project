@@ -16,6 +16,7 @@ function App() {
     const [cookies, setCookie, removeCookie] = useCookies(null);
 	const [favoritePoses, setFavoritePoses] = useState(null);
 	const [categories, setCategories] = useState([]);
+    const [loggedIn, setLoggedIn] = useState(false);
     const userEmail = cookies.Email;
     const authToken = cookies.AuthToken;
     
@@ -39,6 +40,7 @@ function App() {
     useEffect(() => {
       if (authToken){
         getFavoritesData()
+        setLoggedIn(true);
       }},
       []);
 
@@ -63,11 +65,13 @@ function App() {
     // RETURN-------------------------------------------------------------------
     return (
       <div className="App">
-          {!authToken && <Auth/>}
-        {authToken && 
+          {/* {!authToken && <Auth loggedIn={loggedIn}/>} */}
+        
         <>
-        <p>Welcome back {userEmail}</p>
+      
         <Navbar />
+        <h4>Welcome{loggedIn? ` back ${userEmail}`:'!'}</h4>
+        {!loggedIn && <h5>Please login or signup to use the 'Favorites' feature</h5>}
         <Introduction />
         <div className='pose-options-parent'>
         <PosesByCategory categories={categories} />
@@ -76,7 +80,7 @@ function App() {
         </div>
         {/* {sortedFavoritePoses?.map((favoritePose)=><FavoritePosesList key={favoritePose.id} favoritePose={favoritePose} />)} */}
         <Learn />
-        </>}
+        </>
       </div>
     );
 }
