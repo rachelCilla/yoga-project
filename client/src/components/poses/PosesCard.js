@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap";
 import MoreInfo from "./MoreInfo";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import Auth from "../Auth";
+import Auth from "../AuthModal";
 
 export default function PosesCard({ pose, showFavorites }) {
 	const [showMoreInfo, setShowMoreInfo] = useState(false);
