@@ -50,6 +50,7 @@ img {
     grid-area: 1 / 2 / 4 / 3;
     max-height: 55vh;
     justify-self: end;
+    z-index: 5;
     /* max-height: 60vh; */
     /* position: static; */
     /* padding: 0 10px; */

@@ -1,49 +1,103 @@
 import React from "react";
-import { useEffect } from "react";
-import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
-import { useAnimation } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, LayoutGroup, useAnimation } from "framer-motion";
 import Loader from "../loader/Loader";
-import yogaVideo from "../../images/yogaVideo.mp4";
+import yogaVideo from "../../images/yogaMain2.mp4";
 import image3 from "../loader/loaderImages/image3.jpg";
-import Navbar from "../Nav";
+
 import "./Banner.css";
 
+// varients
+const banner = {
+	animate: {
+		transition: {
+			delayChildren: 0.4,
+			staggerChildren: 0.1,
+		},
+	},
+};
+const letterAnimation = {
+	initial: {
+		y: 400,
+	},
+	animate: {
+		y: 0,
+		transition: {
+			ease: [0.6, 0.01, -0.05, 0.95],
+			duration: 1,
+		},
+	},
+};
+
 function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, loggedIn, userEmail }) {
-	// useEffect(() => {
-	// 	loading ? document.querySelector("body").classList.add("loading") : document.querySelector("body").classList.remove("loading");
-	// }, [loading]);
-	//variants
-	const container = {
-		show: {
-			transition: {
-				staggerChildren: 0.35,
-			},
-		},
+	const [playMarquee, setPlayMarquee] = useState(false);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setPlayMarquee(true);
+		}, 2000);
+	}, []);
+
+	const AnimatedLetters = ({ title }) => (
+		<motion.span className="row-title" variants={banner} initial="initial" animate="animate">
+			{[...title].map((letter) => (
+				<motion.span key={Math.random()} className="row-letter" variants={letterAnimation}>
+					{letter}
+				</motion.span>
+			))}
+		</motion.span>
+	);
+
+	const BannerRowTop = ({ title }) => {
+		return (
+			<div className={"banner-row"}>
+				<div className="row-col">
+					<AnimatedLetters title={title} />
+				</div>
+				{/* <motion.div
+					initial={{ opacity: 0, y: 80 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{
+						ease: "easeInOut",
+						duration: 1,
+						delay: 0.4,
+					}}
+					className="row-col">
+					<span className="row-message">
+						We are specialised in setting up the foundation of your brand and setting you up for success.
+					</span>
+				</motion.div> */}
+			</div>
+		);
 	};
-	const item = {
-		hidden: {
-			opacity: 0,
-			y: 200,
-		},
-		show: {
-			opacity: 1,
-			// bring it to original position
-			y: 0,
-			transition: {
-				ease: [0.6, 0.01, -0.05, 0.95],
-				duration: 1.6,
-			},
-		},
-		// runs on unmount
-		exit: {
-			opacity: 0,
-			y: -200,
-			transition: {
-				ease: "easeInOut",
-				duration: 0.8,
-			},
-		},
+
+	const BannerRowCenter = ({ title, playMarquee }) => {
+		return (
+			<div className={`banner-row marquee  ${playMarquee && "animate"}`}>
+				<motion.div
+					initial={{ y: 310 }}
+					animate={{ y: 0 }}
+					transition={{ ease: [0.6, 0.01, -0.05, 0.9], duration: 1 }}
+					className="marquee__inner">
+					{/* <AnimatedLetters title={title} disabled /> */}
+					<AnimatedLetters title={title} />
+				</motion.div>
+			</div>
+		);
 	};
+	const BannerRowBottom = ({ title }) => {
+		return (
+			<div className={"banner-row center"}>
+				<motion.div
+					initial={{ scale: 0 }}
+					animate={{ scale: 1 }}
+					transition={{ ease: [0.6, 0.01, -0.05, 0.95], duration: 1, delay: 1 }}
+					className="scroll"></motion.div>
+				<AnimatedLetters title={title} />
+			</div>
+		);
+	};
+
 	return (
 		<LayoutGroup type="crossfade">
 			<AnimatePresence>
@@ -52,15 +106,14 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 						<Loader setLoading={setLoading} />
 					</motion.div>
 				) : (
+					// transition image
 					<div className="">
-						{/* NAVBAR */}
-						<Navbar toggleHideMainContent={toggleHideMainContent} />
 						{!loading && (
 							<div className="transition-image final">
 								<motion.img
 									src={image3}
-									alt="transition"
 									layoutId="main-image-1"
+									alt="transition image"
 									transition={{
 										ease: [0.6, 0.01, -0.05, 0.95],
 										duration: 1.6,
@@ -68,9 +121,6 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 								/>
 							</div>
 						)}
-
-						{/* HERO */}
-
 						{!hideMainContent && (
 							<>
 								<div className="hero">
@@ -80,25 +130,13 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 
 									<div className="content">
 										{/* WELCOME! TITLE */}
-
-										<motion.div variants={container} initial="hidden" animate="show" exit="exit">
-											<h1>
-												<motion.div
-													variants={container}
-													initial="hidden"
-													animate="show"
-													exit="exit"></motion.div>
-												<span variants={item}>W</span>
-												<span variants={item}>e</span>
-												<span variants={item}>l</span>
-												<span variants={item}>c</span>
-												<span variants={item}>o</span>
-												<span variants={item}>m</span>
-												<span variants={item}>e</span>
-												<span variants={item}>!</span>
-											</h1>
-											<div>{loggedIn ? ` ${userEmail}` : ""}</div>
+										<motion.div className="banner" varients={banner}>
+											<BannerRowTop title={"Discover"} />
+											<BannerRowCenter title={"Yoga"} playMarquee={playMarquee} />
+											<BannerRowBottom title={"Poses"} />
 										</motion.div>
+
+										<div>{loggedIn ? ` ${userEmail}` : ""}</div>
 
 										{!loggedIn && <h5 className="contentBtn">Ready to discover new poses?</h5>}
 									</div>
