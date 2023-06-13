@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
     --inv: #7e6765;
     /* Define the custom variable with the desired color value */

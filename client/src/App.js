@@ -15,10 +15,10 @@ import PosesByCategory from "./components/poses/PosesByCategory";
 import PosesByDifficulty from "./components/poses/PosesByDifficulty";
 import PosesByBenefit from "./components/poses/PosesByBenefit";
 import Nav from "./components/nav/Nav";
-import image2 from "./components/loader/loaderImages/image2.jpg";
+import screenshot from "./images/screenshot.png";
 
 function App() {
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [hideMainContent, setHideMainContent] = useState(false);
 	const [favoritePoses, setFavoritePoses] = useState(null);
@@ -32,9 +32,9 @@ function App() {
 	const authToken = cookies.AuthToken;
 
 	// loading
-	useEffect(() => {
-		loading ? document.querySelector("body").classList.add("loading") : document.querySelector("body").classList.remove("loading");
-	}, [loading]);
+	// useEffect(() => {
+	// 	loading ? document.querySelector("body").classList.add("loading") : document.querySelector("body").classList.remove("loading");
+	// }, [loading]);
 	// hide main content
 	const toggleHideMainContent = () => {
 		setHideMainContent(!hideMainContent);
@@ -89,36 +89,32 @@ function App() {
 	//     ⋆｡ ﾟ ☁︎｡⋆｡ ﾟ ☾ ﾟ ｡⋆ ⋆｡  ✧ °  ｡ʚ 🍓 ɞ ｡° ✧ﾟ ☁︎｡⋆｡ ꒰    return below  ꒱   ﾟ ☾ ﾟ ｡⋆      ⋆｡ ﾟ ☁︎｡⋆｡ ﾟ ☾ ﾟ ｡⋆
 	return (
 		<>
-			<LayoutGroup>
-				<AnimatePresence>
-					{loading ? (
-						<motion.div key="loader">
+			{/* {loading ? (
+						<motion.div key="loader" className="loader">
 							<Loader setLoading={setLoading} />
 						</motion.div>
-					) : (
-						<>
-							<Nav toggleHideMainContent={toggleHideMainContent} />
-							<Banner
-								userEmail={userEmail}
-								toggleHideMainContent={toggleHideMainContent}
-								hideMainContent={hideMainContent}
-								setLoading={setLoading}
-								loading={loading}
-							/>
+					) : (  */}
+			<>
+				<Nav toggleHideMainContent={toggleHideMainContent} />
+				<Banner
+					userEmail={userEmail}
+					toggleHideMainContent={toggleHideMainContent}
+					hideMainContent={hideMainContent}
+					setLoading={setLoading}
+					loading={loading}
+				/>
 
-							{!loading && (
+				{/* {!loading && (
 								<div className="transition-image final">
 									<motion.img
 										transition={{ ease: [0.6, 0.01, -0.05, 0.9], duration: 1.6 }}
-										src={image2}
+										src={screenshot}
 										layoutId="main-image-1"
 									/>
 								</div>
 							)}
-						</>
-					)}
-				</AnimatePresence>
-			</LayoutGroup>
+						</> */}
+			</>
 
 			{/* SECOND HERO SECTION */}
 			{!loading && !hideMainContent && (

@@ -1,11 +1,15 @@
-body.loading {
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     overflow: hidden;
-    height: 100vh;
 }
 
 .loader-inner {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: aliceblue;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -19,6 +23,12 @@ body.loading {
     position: relative;
     align-items: center;
     justify-items: center
+}
+
+.loader-imgs {
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
 }
 
 img {
@@ -45,7 +55,13 @@ img {
 
 }
 
-/* beach tree pose */
+.screenshot {
+    grid-area: 1 / 2 / 4 / 3;
+    max-height: 55vh;
+    justify-self: end;
+    z-index: 5;
+}
+
 .image-3 {
     grid-area: 1 / 2 / 4 / 3;
     max-height: 55vh;

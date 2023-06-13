@@ -53,46 +53,47 @@ export default function Nav({ toggleHideMainContent }) {
 	// RETURN STATEMENT------------------------------------------------------------
 	return (
 		<>
-			{/* nav  */}
-			<motion.div
-				initial={{ opacity: 0, y: -180 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{
-					ease: "easeInOut",
-					duration: 1,
-					delay: 0.6,
-				}}>
-				<div className="nav">
-					<img className="nav-items nav-1" src={yogaIcon} alt="yoga icon" />
-					<div className="nav-items nav-2">Introduction</div>
-					<div className="nav-items nav-3">Poses</div>
-					<div className="nav-items nav-4">Learn</div>
-					{/* LOGGED IN -> FAVORITES AND SIGNOUT BUTTONS */}
-					{loggedIn && (
-						<>
-							<button className="button nav-5" onClick={openFavorites}>
-								See my Favorites
-							</button>
+			{!auth && (
+				<motion.div
+					initial={{ opacity: 0, y: -180 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{
+						ease: "easeInOut",
+						duration: 1,
+						delay: 0.6,
+					}}>
+					<div className="nav">
+						<img className="nav-items nav-1" src={yogaIcon} alt="yoga icon" />
+						<div className="nav-items nav-2">Introduction</div>
+						<div className="nav-items nav-3">Poses</div>
+						<div className="nav-items nav-4">Learn</div>
+						{/* LOGGED IN -> FAVORITES AND SIGNOUT BUTTONS */}
+						{loggedIn && (
+							<>
+								<button className="button nav-5" onClick={openFavorites}>
+									See my Favorites
+								</button>
 
-							<button className="button nav-5" onClick={signOut}>
-								Sign Out
-							</button>
-						</>
-					)}
-					{/* NOT LOGGED IN -> LOGIN/SIGNUP BUTTON */}
-					{!loggedIn && !auth && (
-						<>
-							<motion.button
-								className="button nav-5"
-								onClick={() => (auth ? handleClose() : handleOpen())}
-								whileHover={{ scale: 1.1 }}
-								whileTap={{ scale: 0.9 }}>
-								Login or Sign Up
-							</motion.button>
-						</>
-					)}
-				</div>
-			</motion.div>
+								<button className="button nav-5" onClick={signOut}>
+									Sign Out
+								</button>
+							</>
+						)}
+						{/* NOT LOGGED IN -> LOGIN/SIGNUP BUTTON */}
+						{!loggedIn && !auth && (
+							<>
+								<motion.button
+									className="button nav-5"
+									onClick={() => (auth ? handleClose() : handleOpen())}
+									whileHover={{ scale: 1.1 }}
+									whileTap={{ scale: 0.9 }}>
+									Login or Sign Up
+								</motion.button>
+							</>
+						)}
+					</div>
+				</motion.div>
+			)}
 
 			{/* NAV DISPLAY FEATURES  */}
 
@@ -103,7 +104,14 @@ export default function Nav({ toggleHideMainContent }) {
 			<AnimatePresence mode="wait" initial={false} onExitComplete={() => setAuth(false)}>
 				{auth && (
 					<motion.div>
-						<Auth key="modal" auth={auth} handleClose={handleClose} exit={{ opacity: 0 }} animate={{ scale: 1.2 }} />
+						<Auth
+							key="modal"
+							auth={auth}
+							setAuth={setAuth}
+							handleClose={handleClose}
+							exit={{ opacity: 0 }}
+							animate={{ scale: 1.2 }}
+						/>
 					</motion.div>
 				)}
 			</AnimatePresence>

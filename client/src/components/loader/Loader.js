@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useLayoutEffect } from "react";
+import { motion as m } from "framer-motion";
+
 import "./Loader.css";
 
 // images imports
@@ -9,98 +9,73 @@ import image2jpg from "./loaderImages/image2.jpg";
 import image3jpg from "./loaderImages/image3.jpg";
 import image4jpg from "./loaderImages/image4.jpg";
 import image5jpg from "./loaderImages/image5.jpg";
+import screenshot from "../../images/screenshot.png";
 
-// variants
-
-// parent of all images
-const container = {
-	animate: {
-		transition: {
-			delay: 2,
-			when: "beforeChildren",
-			staggerChildren: 0.5,
-		},
-	},
-};
-// item = staggered Children
-const item = {
-	initial: {
-		y: 500,
-		opacity: 0,
-	},
-	animate: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			ease: [0.6, 0.01, 0.05, 0.9], // [stiffness, damping, velocity, mass
-			scale: [1, 2, 3, 4],
-			duration: 1.6,
-		},
-	},
-	exit: {
-		opacity: 0,
-		y: -500,
-		transition: {
-			ease: "easeInOut",
-			duration: 0.8,
-		},
-	},
-};
-const itemMain = {
-	initial: {
-		y: 500,
-		opacity: 0,
-	},
-	animate: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			ease: [0.6, 0.01, 0.05, 0.9], // [stiffness, damping, velocity, mass
-			duration: 1.6,
-		},
-	},
-	// exit: {
-	// 	opacity: 0,
-	// 	y: -500,
-	// 	transition: {
-	// 		ease: "easeInOut",
-	// 		duration: 0.8,
-	// 	},
-	// },
-};
-export default function Loader({ setLoading }) {
-	const [isAnimationReady, setIsAnimationReady] = useState(false);
+export default function Loader() {
+	const [beginAnimation, setBeginAnimation] = useState(false);
 
 	useEffect(() => {
-		// Simulate some asynchronous loading
 		setTimeout(() => {
-			setIsAnimationReady(true);
-		}, 3000);
+			setBeginAnimation(true);
+		}, 2000);
 	}, []);
 
 	return (
-		<>
-			<div className="loader">
-				<motion.div
-					variants={container}
-					initial="initial"
-					animate="animate"
-					exit="exit"
-					className="loader-inner"
-					onAnimationComplete={() => setLoading(false)}>
-					{/* MOTION CHILDREN */}
+		<m.div className="loader-inner" initial={{ opacity: 1 }} animate={{ opacity: 1 }} transition={{ delayChildren: 2 }}>
+			{beginAnimation && (
+				<>
+					<m.img
+						className="image-1"
+						alt="yoga pose"
+						src={image1jpg}
+						initial={{ y: -100, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						transition={{ duration: 2, delay: 1, exit: 4 }}
+						exit={{ y: 200 }}
+					/>
 
-					<motion.img variants={item} className="image-1" src={image1jpg} alt="yoga pose" />
-
-					<motion.img variants={item} alt="yoga pose" className="image-2" src={image2jpg} />
-
-					<motion.img variants={item} className="image-4" src={image4jpg} alt="yoga pose" />
-
-					<motion.img variants={item} className="image-5" src={image5jpg} alt="yoga pose" />
-					<motion.img variants={itemMain} alt="yoga pose" layoutId="main-image-1" className="image-3" src={image3jpg} />
-				</motion.div>
-			</div>
-			{/* ) : null} */}
-		</>
+					<m.img
+						className="image-2"
+						alt="yoga pose"
+						src={image2jpg}
+						initial={{ y: -100, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						transition={{ duration: 2, delay: 3 }}
+					/>
+					{/* <m.img
+						className="image-3"
+						alt="yoga pose"
+						src={image3jpg}
+						initial={{ y: -100, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						transition={{ duration: 2, delay: 3 }}
+					/> */}
+					<m.img
+						className="image-4"
+						alt="yoga pose"
+						src={image3jpg}
+						initial={{ y: -100, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						transition={{ duration: 2, delay: 5 }}
+					/>
+					<m.img
+						className="image-5"
+						alt="yoga pose"
+						src={image5jpg}
+						initial={{ y: -100, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						transition={{ duration: 2, delay: 7 }}
+					/>
+				</>
+			)}
+			<m.img
+				className="screenshot"
+				alt="yoga pose"
+				src={screenshot}
+				initial={{ y: -100, opacity: 0 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{ duration: 2, delay: 0 }}
+			/>
+		</m.div>
 	);
 }
