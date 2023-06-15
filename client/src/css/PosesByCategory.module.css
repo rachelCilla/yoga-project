@@ -1,4 +1,4 @@
-.hidden {
+/* .hidden {
 	opacity: 0;
 	filter: blur(7px);
 	transition: all 3s;
@@ -15,8 +15,8 @@
 	.hidden {
 		transition: none;
 	}
-}
-
+} */
+/* 
 .video {
 	height: 40vh;
 }
@@ -31,4 +31,4 @@
 .card {
 	background-color: #d7d8d8;
 	border: #98a7ae solid 1px;
-}
+} */

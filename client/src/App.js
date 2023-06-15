@@ -95,7 +95,6 @@ function App() {
 						</motion.div>
 					) : (  */}
 			<>
-				<Nav toggleHideMainContent={toggleHideMainContent} />
 				<Banner
 					userEmail={userEmail}
 					toggleHideMainContent={toggleHideMainContent}
@@ -103,7 +102,7 @@ function App() {
 					setLoading={setLoading}
 					loading={loading}
 				/>
-
+				<Nav toggleHideMainContent={toggleHideMainContent} />
 				{/* {!loading && (
 								<div className="transition-image final">
 									<motion.img

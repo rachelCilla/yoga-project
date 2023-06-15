@@ -24,10 +24,8 @@ export default function Auth({ auth, handleClose }) {
 			y: "0",
 			opacity: 1,
 			transition: {
-				duration: 2,
+				duration: 3,
 				type: "spring",
-				damping: 100,
-				stiffness: 500,
 			},
 		},
 		exit: {
@@ -89,9 +87,15 @@ export default function Auth({ auth, handleClose }) {
 					className="w-8 h-8 absolute top-0 right-0 transform m-3 hover:bg-gray-100 text-gray-800 border border-gray-400 rounded shadow">
 					<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
 				</svg>
-				<div className="w-2/6">
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{
+						duration: 3,
+					}}
+					className="w-2/6">
 					<Player loop autoplay src="https://lottie.host/2f38fc54-efd5-4ed7-8a6f-5cc5c5d3d70b/A7HDImtSdr.json" />
-				</div>
+				</motion.div>
 				{/* SIGN IN DIV */}
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm flex  justify-center m-0">
 					<h2 className="text-center text-3xl font-bold leading-9 tracking-tight text-grayBlueDark font-mont">

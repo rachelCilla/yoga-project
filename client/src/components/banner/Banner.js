@@ -5,7 +5,7 @@ import Loader from "../loader/Loader";
 import yogaVideo from "../../images/yogaMain2.mp4";
 import VideoScreenshot from "../../images/screenshot.png";
 
-import "./Banner.css";
+// import "./Banner.css";
 
 // varients
 const banner = {
@@ -101,32 +101,19 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 
 	return (
 		<>
-			{/* PLAY LOADING ANIMATION */}
-			{/* {loading && (
-				<LayoutGroup type="crossfade">
-					<AnimatePresence>
-						<motion.div key="loader">
-							<Loader setLoading={setLoading} />
-						</motion.div>
-					</AnimatePresence>
-				</LayoutGroup>
-			)} */}
-			{/* PLAY TRANSITION ANIMATION */}
-
-			{/* REGULAR CONTENT */}
-
 			{!hideMainContent && (
-				// !loading &&
-				<div>
-					<div className="hero">
-						<video autoPlay loop muted playsInline className="heroVideo">
-							<source src={yogaVideo} type="video/mp4" /> Your browser does not support the video tag.
-						</video>
+				<>
+					<video autoPlay loop muted playsInline className="h-screen w-screen object-cover">
+						<source src={yogaVideo} type="video/mp4" /> Your browser does not support the video tag.
+					</video>
 
-						<div className="content">
+					<div className="">
+						<div
+							className=" text-center
+                         absolute top-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
 							{/* WELCOME! TITLE */}
 							<motion.div
-								className="z-1 font-poiret font-extralight text-9xl text-white text-center "
+								className=" font-poiret text-center text-9xl text-white font-semibold transition duration-500 hover:text-transparent hover:text-stroke-2   "
 								initial={{ opacity: 0, y: 80 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{
@@ -137,18 +124,16 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 								Welcome!
 							</motion.div>
 
-							{/* <motion.div className="banner" varients={banner}>
-							<BannerRowTop title={"Discover"} />
-							<BannerRowCenter title={"Yoga"} playMarquee={playMarquee} />
-							<BannerRowBottom title={"Poses"} />
-						</motion.div> */}
-
 							<div>{loggedIn ? ` ${userEmail}` : ""}</div>
 
-							{!loggedIn && <h5 className="z-1 contentBtn font-raleway">Ready to discover new poses?</h5>}
+							{!loggedIn && (
+								<h5 className=" inline-block font-raleway text-white text-xlg border-2 border-white px-10 py-3 rounded-full mt-5 ">
+									Ready to discover new poses?
+								</h5>
+							)}
 						</div>
 					</div>
-				</div>
+				</>
 			)}
 		</>
 	);

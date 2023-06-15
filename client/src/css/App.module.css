@@ -9,7 +9,7 @@
     "Van Dyke":"483E40",
     "Gunmetal":"323744",
     "Jet":"2E2F37"} */
-.hidden {
+/* .hidden {
     opacity: 0;
     filter: blur(5px);
     transition: all 1s;
@@ -26,9 +26,9 @@
     opacity: 1;
     filter: blur(0);
     transform: translateX(0);
-}
+} */
 
-
+/* 
 .nav {
     width: 100%;
     position: absolute;
@@ -40,20 +40,20 @@
     align-items: center;
     background-color: rgba(255, 255, 255, 0.2);
     z-index: 2;
-}
+} */
 
-.logo {
+/* .logo {
     width: 40px;
-}
+} */
 
-.nav-items {
+/* .nav-items {
     list-style: none;
     display: inline-block;
     margin-left: 40px;
     color: white;
-}
+} */
 
-.button {
+/* .button {
     display: inline-block;
     color: white;
     font-size: 20px;
@@ -62,31 +62,31 @@
     border-radius: 50px;
     transition: 0.6s;
     background-color: transparent;
-}
-
+} */
+/* 
 .button:hover {
     background-color: white;
     color: transparent;
     cursor: pointer;
-}
+} */
 
 /* FIND YOGA POSE OPTIONS - APP.JS
  */
-.poseOptionsDiv {
+/* .poseOptionsDiv {
     background-image: url("../images/white-background-yoga-pose.jpg");
     background-size: cover;
     background-position: bottom center;
     height: 100vh;
     padding: 20px;
-}
+} */
 
 /* "what would you like to discover"  */
-.beachYogaVideo {
+/* .beachYogaVideo {
     width: 100%;
     z-index: -2;
-}
+} */
 
-.posesByTitle {
+/* .posesByTitle {
     font-size: 160px;
     color: #483e40;
     font-weight: 600;
@@ -115,10 +115,10 @@
     color: var(--inv);
     letter-spacing: 1.1rem;
     text-transform: uppercase;
-}
+} */
 
 /* poses-by-title animation */
-span {
+/* span {
     display: inline-block;
     opacity: 0;
     filter: blur(4px);
@@ -158,4 +158,4 @@ span:nth-child(7) {
         opacity: 1;
         filter: blur(0);
     }
-}
+} */
