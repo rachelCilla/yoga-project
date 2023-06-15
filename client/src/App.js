@@ -95,15 +95,17 @@ function App() {
 						</motion.div>
 					) : (  */}
 			<>
-				<Banner
-					userEmail={userEmail}
-					toggleHideMainContent={toggleHideMainContent}
-					hideMainContent={hideMainContent}
-					setLoading={setLoading}
-					loading={loading}
-				/>
-				<Nav toggleHideMainContent={toggleHideMainContent} />
-				{/* {!loading && (
+				{" "}
+				{hideMainContent && (
+					<Banner
+						userEmail={userEmail}
+						toggleHideMainContent={toggleHideMainContent}
+						hideMainContent={hideMainContent}
+						setLoading={setLoading}
+						loading={loading}
+					/>
+
+					/* {!loading && (
 								<div className="transition-image final">
 									<motion.img
 										transition={{ ease: [0.6, 0.01, -0.05, 0.9], duration: 1.6 }}
@@ -112,12 +114,14 @@ function App() {
 									/>
 								</div>
 							)}
-						</> */}
+						</> */
+				)}
 			</>
+			<Nav toggleHideMainContent={toggleHideMainContent} />
 
 			{/* SECOND HERO SECTION */}
-			{!loading && !hideMainContent && (
-				<div className="">
+			{!hideMainContent && (
+				<div className="bg-red-300 border-2 border-red-500">
 					{/* POSE OPTIONS */}
 					<div className={styles.poseOptionsDiv}>
 						<h1 className={`${styles.posesByTitle}`}>

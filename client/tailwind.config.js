@@ -9,11 +9,17 @@ module.exports = {
 			lato: ["Lato", "sans-serif"],
 		},
 		extend: {
+			// COLOR PALLETE https://coolors.co/94bbcc-467187-ffffff-e1cec6-483e40
 			colors: {
 				grayBlue: "#7a80a3",
 				grayBlueLight: "#9ba0bd",
 				grayBlueDark: "#5c5f70",
 				grayBlueDarker: "#474957",
+				primary5: "#6F5A5F",
+				primary4: "#467187",
+				primary3: "#94BBCC",
+				primary2: "#E1CEC6",
+				primary1: "#F8F8F8",
 			},
 		},
 	},
