@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
-
+import PoseIntro from "./components/PoseIntro";
 import styles from "./css/App.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -11,9 +11,7 @@ import Banner from "./components/banner/Banner";
 
 import Loader from "./components/loader/Loader";
 import Learn from "./components/Learn";
-import PosesByCategory from "./components/poses/PosesByCategory";
-import PosesByDifficulty from "./components/poses/PosesByDifficulty";
-import PosesByBenefit from "./components/poses/PosesByBenefit";
+
 import Nav from "./components/nav/Nav";
 import screenshot from "./images/screenshot.png";
 
@@ -22,11 +20,9 @@ function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [hideMainContent, setHideMainContent] = useState(false);
 	const [favoritePoses, setFavoritePoses] = useState(null);
-	const [categories, setCategories] = useState([]);
+
 	const [showComponents, setShowComponents] = useState(false);
-	const [showCategory, setShowCategory] = useState(false);
-	const [showDifficulty, setShowDifficulty] = useState(false);
-	const [showBenefit, setShowBenefit] = useState(false);
+
 	const [cookies, setCookie, removeCookie] = useCookies(null);
 	const userEmail = cookies.Email;
 	const authToken = cookies.AuthToken;
@@ -47,16 +43,6 @@ function App() {
 		}
 	}, []);
 
-	// API CALLS-----------------------------------------------------------------
-	useEffect(() => {
-		axios.get("https://yoga-api-nzy4.onrender.com/v1/categories")
-			.then((response) => {
-				setCategories(response.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
 	const getFavoritesData = async () => {
 		try {
 			const response = await fetch(`http://localhost:8000/favorite_poses/${userEmail}`);
@@ -121,29 +107,9 @@ function App() {
 
 			{/* SECOND HERO SECTION */}
 			{!hideMainContent && (
-				<div className="bg-red-300 border-2 border-red-500">
+				<div className="">
 					{/* POSE OPTIONS */}
-					<div className={styles.poseOptionsDiv}>
-						<h1 className={`${styles.posesByTitle}`}>
-							<span className={styles.hidden}>How&nbsp;</span>
-							<span className={styles.hidden}>would&nbsp;</span>
-							<span className={styles.hidden}>you&nbsp;</span>
-							<span className={styles.hidden}>like&nbsp;</span>
-							<span className={styles.hidden}>to&nbsp;</span>
-							<span className={styles.hidden}>discover&nbsp;</span>
-							<span className={styles.hidden}>?</span>
-						</h1>
-						<div className={`${styles.poseOptionsParent} ${styles.hidden}`}>
-							{showCategory && (
-								<PosesByCategory
-									categories={categories}
-									className={`${styles.hidden} ${showCategory && styles.show}`}
-								/>
-							)}
-							{showDifficulty && <PosesByDifficulty className={`${styles.hidden} ${showDifficulty && styles.show}`} />}
-							{showBenefit && <PosesByBenefit className={`${styles.hidden} ${showBenefit && styles.show}`} />}
-						</div>
-					</div>
+					<PoseIntro />
 					{/* LEARN */}
 					<Learn />
 				</div>

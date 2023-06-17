@@ -3,11 +3,55 @@
 @tailwind utilities;
 
 
+/* PoseIntro.js*/
+
+.custom-filter {
+    background: linear-gradient(to bottom, rgba(68, 52, 82, 0.8) 75%, transparent);
+}
+
+.posesTitle {
+    filter: drop-shadow(2px 2px 5px rgb(0, 0, 0, 0.7));
+}
 
 
 
-:root {
-    --inv: #7e6765;
-    /* Define the custom variable with the desired color value */
-    --def: #7e6765;
+
+.cardTitle {
+    color: #9A666D;
+    /* center text */
+    text-align: center;
+
+
+}
+
+.category-difficulty-benefit {
+    transform: scale(1.2);
+    display: block;
+}
+
+.playerGlow {
+    filter: opacity(80%);
+    filter: drop-shadow(2px 2px 5px rgb(255, 195, 195));
+}
+
+.cardGrowGlow:hover {
+    border: none;
+    transform: scale(1.05);
+    filter: opacity(80%) drop-shadow(2px 2px 5px rgb(0, 0, 0, 0.5));
+    /* filter: drop-shadow(2px 2px 5px rgb(253, 198, 175)); */
+    background: linear-gradient(180deg, rgba(217, 122, 135, .6) 0%, rgba(253, 194, 175, .6) 41%, rgba(253, 194, 175, .6) 59%, rgba(119, 85, 143, .6) 100%);
+
+
+}
+
+/* card hovers */
+.cardGrowGlow:hover p,
+.cardGrowGlow:hover h2,
+.cardGrowGlow:hover a {
+    filter: brightness(20%);
+}
+
+.cardGrowGlow:hover .playerGlow {
+    filter: invert(90%)drop-shadow(0 0 1px rgb(255, 255, 255)) drop-shadow(0 0 4px rgb(255, 171, 186)) drop-shadow(0 0 7px rgb(255, 206, 169)) drop-shadow(0 0 20px rgba(221, 68, 101)) drop-shadow(0 0 30px rgba(0, 0, 0, 1));
+
 }
