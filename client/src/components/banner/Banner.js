@@ -4,6 +4,7 @@ import { AnimatePresence, motion, LayoutGroup, useAnimation } from "framer-motio
 import Loader from "../loader/Loader";
 import yogaVideo from "../../images/yogaMain2.mp4";
 import VideoScreenshot from "../../images/screenshot.png";
+import { Link } from "react-router-dom";
 
 // import "./Banner.css";
 
@@ -126,11 +127,11 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 						<div>{loggedIn ? ` ${userEmail}` : ""}</div>
 
 						{!loggedIn && (
-							<h5
-								onClick={toggleHideMainContent}
-								className=" inline-block font-raleway text-white text-xlg border-2 border-white px-10 py-3 rounded-full mt-5 ">
-								Ready to discover new poses?
-							</h5>
+							<Link to="/poseintro">
+								<h5 className=" inline-block font-raleway text-white text-xlg border-2 border-white px-10 py-3 rounded-full mt-5 ">
+									Ready to discover new poses?
+								</h5>
+							</Link>
 						)}
 					</div>
 				</div>

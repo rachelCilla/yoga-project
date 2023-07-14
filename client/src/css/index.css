@@ -3,25 +3,40 @@
 @tailwind utilities;
 
 
+
+* {
+
+    box-sizing: border-box;
+}
+
+nav {
+    z-index: 10000 !important;
+}
+
+/* NavLinks- active (automatic) */
+.active {
+    color: red;
+}
+
 /* PoseIntro.js*/
 
 .custom-filter {
     background: linear-gradient(to bottom, rgba(68, 52, 82, 0.8) 75%, transparent);
 }
 
+.cardGrowGlow {
+    transition: background-color 1.8s ease, color 1s ease, width 1s ease, height 1s ease;
+
+}
+
 .posesTitle {
     filter: drop-shadow(2px 2px 5px rgb(0, 0, 0, 0.7));
 }
-
-
-
 
 .cardTitle {
     color: #9A666D;
     /* center text */
     text-align: center;
-
-
 }
 
 .category-difficulty-benefit {
@@ -34,24 +49,130 @@
     filter: drop-shadow(2px 2px 5px rgb(255, 195, 195));
 }
 
-.cardGrowGlow:hover {
-    border: none;
-    transform: scale(1.05);
-    filter: opacity(80%) drop-shadow(2px 2px 5px rgb(0, 0, 0, 0.5));
-    /* filter: drop-shadow(2px 2px 5px rgb(253, 198, 175)); */
-    background: linear-gradient(180deg, rgba(217, 122, 135, .6) 0%, rgba(253, 194, 175, .6) 41%, rgba(253, 194, 175, .6) 59%, rgba(119, 85, 143, .6) 100%);
+.glass-btn {
+    max-width: 70%;
+    font-weight: 400;
+    color: #fff;
+    text-decoration: none;
+    margin: 0 auto;
+    justify-self: end;
+    align-self: flex-end;
+    display: inline-block;
+    padding: 15px 25px;
+    background: rgba(154, 102, 109, 0.58);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.2px);
+    -webkit-backdrop-filter: blur(10.2px);
+    transition: width 0.1s ease, height 0.1s ease;
+}
 
-
+.glass-btn:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: 50%;
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.2));
+    border-radius: 9999px;
+    pointer-events: none;
 }
 
 /* card hovers */
+.cardGrowGlow:hover {
+    border: none;
+    transform: scale(1.1);
+    filter: opacity(90%) drop-shadow(2px 2px 5px rgba(255, 255, 255, 0.5));
+    /* filter: drop-shadow(2px 2px 5px rgb(253, 198, 175)); */
+    background: linear-gradient(180deg, rgba(217, 122, 135, .6) 0%, rgba(253, 194, 175, .6) 41%, rgba(253, 194, 175, .6) 59%, rgba(119, 85, 143, .6) 100%);
+
+}
+
+/* .pose-card-p-background:hover {
+    background-color: rgba(255, 255, 255, .2);
+    padding: 10px 10px 5px 10px;
+    border-radius: 20px;
+} */
+
 .cardGrowGlow:hover p,
-.cardGrowGlow:hover h2,
-.cardGrowGlow:hover a {
+.cardGrowGlow:hover h2 {
     filter: brightness(20%);
 }
 
 .cardGrowGlow:hover .playerGlow {
+    /* yoga icons */
     filter: invert(90%)drop-shadow(0 0 1px rgb(255, 255, 255)) drop-shadow(0 0 4px rgb(255, 171, 186)) drop-shadow(0 0 7px rgb(255, 206, 169)) drop-shadow(0 0 20px rgba(221, 68, 101)) drop-shadow(0 0 30px rgba(0, 0, 0, 1));
 
+}
+
+.cardGrowGlow:hover p {
+    font-weight: 400;
+}
+
+.cardGrowGlow:hover .glass-btn {
+    background: rgba(43, 27, 44, 0.58);
+    /* background: rgba(43.5, 27, 36, 0.58); */
+    color: #fff;
+
+}
+
+.glass-btn:hover {
+
+    transform: scale(1.1);
+
+
+}
+
+/* .cardGrowGlow:hover a { */
+/* search btn */
+/* border: 2px solid rgb(32, 5, 51);
+    filter: none;
+    color: rgb(32, 5, 51);
+    background-color: rgba(255, 255, 255, 0.102);
+
+
+} */
+
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+
+}
+
+/* pose category card */
+
+.hidden {
+    opacity: 0;
+    filter: blur(7px);
+    transition: all 3s;
+    transform: translateX(-100%);
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+@media (prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}
+
+
+.posesBy {
+    padding-top: 20px;
+    font-size: 1.4rem;
+    color: var(--inv);
+    letter-spacing: 1.1rem;
+    text-transform: uppercase;
+}
+
+.card {
+    background-color: #d7d8d8;
+    border: #98a7ae solid 1px;
 }

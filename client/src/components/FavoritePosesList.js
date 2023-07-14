@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import PosesCard from "./poses/PosesCard";
+import PosesCard from "./poses/categories/PosesCard";
 import axios from "axios";
 
-export default function FavoritePosesList({
-	handleBackButtonClick,
-	favoritePose,
-	showFavorites,
-}) {
+export default function FavoritePosesList({ handleBackButtonClick, favoritePose, showFavorites }) {
 	const [cookies, setCookie, removeCookie] = useCookies(null);
 	const [apiData, setApiData] = useState(null);
 
@@ -15,9 +11,7 @@ export default function FavoritePosesList({
 
 	const getPoseData = (pose) => {
 		return axios
-			.get(
-				`https://yoga-api-nzy4.onrender.com/v1/poses?name=${pose}`
-			)
+			.get(`https://yoga-api-nzy4.onrender.com/v1/poses?name=${pose}`)
 			.then((response) => {
 				return response.data;
 			})
@@ -29,13 +23,10 @@ export default function FavoritePosesList({
 
 	const getAllFavorites = async () => {
 		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_SERVER_URL}/favorite_poses/${userEmail}`,
-				{
-					method: "GET",
-					headers: { "Content-Type": "application/json" },
-				}
-			);
+			const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/favorite_poses/${userEmail}`, {
+				method: "GET",
+				headers: { "Content-Type": "application/json" },
+			});
 			const data = await response.json();
 			return data;
 			// const dataNames = data.map((obj) => obj.pose_name);
@@ -59,16 +50,10 @@ export default function FavoritePosesList({
 
 				const fetchAllPoseData = async () => {
 					// console.log('unique', uniqueDataNames)=['Boat', 'Half Boat', 'Chair', 'Crow', 'Dolphin', 'Side Plank', 'Plank']
-					const poseData = await Promise.all(
-						uniqueDataNames.map((poseName) =>
-							getPoseData(poseName)
-						)
-					);
+					const poseData = await Promise.all(uniqueDataNames.map((poseName) => getPoseData(poseName)));
 					//    console.log('posedata',poseData)
 					// ;=(7) [undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-					const filteredPoseData = poseData.filter(
-						(pose) => pose !== null
-					);
+					const filteredPoseData = poseData.filter((pose) => pose !== null);
 					setApiData(filteredPoseData);
 				};
 
@@ -87,10 +72,7 @@ export default function FavoritePosesList({
 			{apiData !== null &&
 				apiData.map((poseObj) => (
 					<div key={poseObj.id}>
-						<PosesCard
-							pose={poseObj}
-							showFavorites={showFavorites}
-						/>
+						<PosesCard pose={poseObj} showFavorites={showFavorites} />
 					</div>
 				))}
 		</div>
