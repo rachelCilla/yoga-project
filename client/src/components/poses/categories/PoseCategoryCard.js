@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 // children
 import ChosenCategoryPoseList from "./ChosenCategoryPoseList";
-import { CategoriesContext } from "../PoseIntro";
+// import { CategoriesContext } from "../PoseIntro";
+import { useOutletContext } from "react-router-dom";
 
-export default function PoseCategoryCard() {
+export default function PoseCategoryCard({ categories }) {
 	const [showPoseList, setShowPoseList] = useState(false);
 	const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
 
-	const categories = useContext(CategoriesContext);
+	// const categories = useContext(CategoriesContext);
 
 	const handleButtonClick = (categoryIndex) => {
 		setShowPoseList(!showPoseList);
@@ -23,7 +24,7 @@ export default function PoseCategoryCard() {
 		<div className="bg-blue-100">
 			<h1> render me </h1>
 
-			{/* {categories.map((category, index) => (
+			{categories.map((category, index) => (
 				<div key={category.category_name}>
 					<h3>{category.category_name}</h3>
 					<button onClick={() => handleButtonClick(index)}>Click here for {category.category_name} poses</button>
@@ -33,10 +34,9 @@ export default function PoseCategoryCard() {
 							categories={categories}
 							categoryIndex={selectedCategoryIndex}
 						/>
-                    )}
-            
+					)}
 				</div>
-            ))} */}
+			))}
 		</div>
 	);
 }

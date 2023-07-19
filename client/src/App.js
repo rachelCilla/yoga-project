@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useCookies } from "react-cookie";
-
+import { PoseProvider } from "./components/poses/Context";
 import "bootstrap/dist/css/bootstrap.css";
 
 // import styles from "./css/App.module.css";
@@ -8,11 +8,16 @@ import SharedLayout from "./components/SharedLayout";
 import Banner from "./components/banner/Banner";
 import Learn from "./components/Learn";
 import Error from "./components/Error";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import FavoritePosesList from "./components/FavoritePosesList";
 import Auth from "./components/auth/AuthModal";
 import Nav from "./components/nav/Nav";
 import { Outlet } from "react-router-dom";
+import Layout from "./components/SharedLayout";
+import PoseIntro from "./components/poses/PoseIntro";
+import PosesByCategory from "./components/poses/categories/PosesByCategory";
+import PosesCard from "./components/poses/categories/PosesCard";
+import PoseCategoryCard from "./components/poses/categories/PoseCategoryCard";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -51,13 +56,20 @@ function App() {
 
 	//     ⋆｡ ﾟ ☁︎｡⋆｡ ﾟ ☾ ﾟ ｡⋆ ⋆｡  ✧ °  ｡ʚ 🍓 ɞ ｡° ✧ﾟ ☁︎｡⋆｡ ꒰    return below  ꒱   ﾟ ☾ ﾟ ｡⋆      ⋆｡ ﾟ ☁︎｡⋆｡ ﾟ ☾ ﾟ ｡⋆
 	return (
-		<>
-			<Nav className="fixed top-0 left-0 right-0" />
-
-			<div className="">
-				<Outlet />
-			</div>
-		</>
+		<BrowserRouter>
+			<Routes>
+				{/* API CALLS in Layout */}
+				<Route element={<Layout />}>
+					<Route path="/" element={<Banner />} />
+					<Route path="/poseintro" element={<PoseIntro />} />
+					<Route path="/learn" element={<Learn />} />
+					<Route path="/favorites" element={<FavoritePosesList />} />
+					<Route path="/auth" element={<Auth />} />
+					<Route path="/posesbycategory" element={<PosesByCategory />} />
+					<Route path="*" element={<Error />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	);
 }
 

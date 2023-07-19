@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 // children
 import PosesCard from "./PosesCard";
-import { CategoriesContext } from "../PoseIntro";
+// import { CategoriesContext } from "../PoseIntro";
 
-export default function ChosenCategoryPoseList({ handleBackButtonClick, categoryIndex }) {
-	const categories = useContext(CategoriesContext);
+export default function ChosenCategoryPoseList({ handleBackButtonClick, categoryIndex, categories }) {
+	// const categories = useContext(CategoriesContext);
 	const poses = categories[categoryIndex].poses;
 
 	return (
