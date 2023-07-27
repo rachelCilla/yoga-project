@@ -127,7 +127,7 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 						<div>{loggedIn ? ` ${userEmail}` : ""}</div>
 
 						{!loggedIn && (
-							<Link to="/poseintro">
+							<Link to="/home">
 								<h5 className=" inline-block font-raleway text-white text-xlg border-2 border-white px-10 py-3 rounded-full mt-5 ">
 									Ready to discover new poses?
 								</h5>

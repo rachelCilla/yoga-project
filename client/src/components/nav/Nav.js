@@ -6,7 +6,7 @@ import Auth from "../auth/AuthModal";
 import yogaIcon from "../../images/icons8-prenatal-yoga-50.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { Outlet, Link } from "react-router-dom";
-// import "./Nav.css";
+import { useOutletContext } from "react-router-dom";
 
 export default function Nav() {
 	const [showFavorites, setShowFavorites] = useState(false);
@@ -14,6 +14,7 @@ export default function Nav() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [auth, setAuth] = useState(false);
 
+	console.log("logged in " + loggedIn);
 	// const toggleAuth = () => {
 	// 	setAuth(!auth);
 	// };
@@ -30,14 +31,6 @@ export default function Nav() {
 		removeCookie("Email");
 		removeCookie("AuthToken");
 		window.location.reload();
-	};
-
-	const openFavorites = () => {
-		setShowFavorites(true);
-	};
-
-	const handleBackButtonClick = () => {
-		setShowFavorites(false);
 	};
 
 	useEffect(() => {
@@ -69,7 +62,7 @@ export default function Nav() {
 							</Link>
 						</li>
 						<li className=" flex items-center m-2">
-							<Link to="/poseintro" className="text-white font-raleway text-lg  no-underline">
+							<Link to="/home" className="text-white font-raleway text-lg  no-underline">
 								Poses
 							</Link>
 						</li>
@@ -79,24 +72,24 @@ export default function Nav() {
 							</Link>
 						</li>
 						<li className=" flex items-center m-2">
-							<Link to="/favorites" className="text-white font-raleway text-lg  no-underline">
+							<Link to="/favorites" className="text-white font-raleway text-lg  no-underline" state={loggedIn}>
 								My Favorites
 							</Link>
 						</li>
 
-						{loggedIn && (
+						{/* {loggedIn && (
 							<li className="">
 								<a
-									onClick={openFavorites}
+									// onClick={openFavorites}
 									className="block self-center text-white font-raleway text-2xl border-white border-2">
 									Favorites
 								</a>
 							</li>
-						)}
+						)} */}
 					</ul>
 				</div>
 
-				{/* LOGGED IN -> FAVORITES AND SIGNOUT BUTTONS */}
+				{/* SIGNOUT BUTTON */}
 				{loggedIn && (
 					<div className="contents">
 						{/* <button
@@ -113,16 +106,18 @@ export default function Nav() {
 					</div>
 				)}
 
-				{/* NOT LOGGED IN -> LOGIN/SIGNUP BUTTON */}
+				{/* LOGIN/SIGNUP BUTTON */}
 				{!loggedIn && !auth && (
 					<>
-						<motion.button
-							className=" font-raleway text-white text-md border-2 border-white px-10 py-2 rounded-full m-2"
-							// onClick={() => (auth ? handleClose() : handleOpen())}
-							whileHover={{ scale: 1.1 }}
-							whileTap={{ scale: 0.9 }}>
-							Login or Sign Up
-						</motion.button>
+						<Link to="/auth">
+							<motion.button
+								className=" font-raleway text-white text-md border-2 border-white px-10 py-2 rounded-full m-2"
+								// onClick={() => (auth ? handleClose() : handleOpen())}
+								whileHover={{ scale: 1.1 }}
+								whileTap={{ scale: 0.9 }}>
+								Login or Sign Up
+							</motion.button>
+						</Link>
 					</>
 				)}
 			</motion.nav>

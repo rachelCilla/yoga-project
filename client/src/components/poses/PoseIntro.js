@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // import { PoseContext } from "./Context";
 import { Outlet } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
+
 export default function () {
 	const { categories } = useOutletContext();
 	// const [categories, setCategories] = useState([]);
@@ -65,7 +66,7 @@ export default function () {
 
 							{/* LINK TO POSES BY CATEOGRY from pose intro*/}
 							<Link
-								to="/posesbycategory"
+								to="/posecategorycard"
 								// state={{ categories }}
 								className=" glass-btn rounded-full">
 								Search
@@ -147,9 +148,9 @@ export default function () {
 									viewBox="0 0 20 20"
 									fill="currentColor">
 									<path
-										fill-rule="evenodd"
+										fillRule="evenodd"
 										d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-										clip-rule="evenodd"
+										clipRule="evenodd"
 									/>
 								</svg>
 							</Link>

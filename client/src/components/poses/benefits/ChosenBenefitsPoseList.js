@@ -1,6 +1,6 @@
 import React from "react";
 import posesBenefitData from "../PoseData";
-import PosesCard from "../categories/PosesCard";
+import PosesCard from "../difficulty/IndividualPoseCard";
 import ErrorBoundary from "../ErrorBoundary";
 
 export default function ChosenBenefitsPoseList({ handleBackClick, activeItem, mainCategory, activeSubCategory }) {

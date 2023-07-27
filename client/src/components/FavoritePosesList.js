@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import PosesCard from "./poses/categories/PosesCard";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function FavoritePosesList({ handleBackButtonClick, favoritePose, showFavorites }) {
 	const [cookies, setCookie, removeCookie] = useCookies(null);
 	const [apiData, setApiData] = useState(null);
+	const [showingFavorites, setShowingFavorites] = useState(true);
 
 	const userEmail = cookies.Email;
+	const location = useLocation();
+	const loggedIn = location.state;
 
 	const getPoseData = (pose) => {
 		return axios
@@ -67,14 +72,25 @@ export default function FavoritePosesList({ handleBackButtonClick, favoritePose,
 	return (
 		<div className="">
 			<h1 className="">Favorite Poses List</h1>
-			<p>{userEmail}</p>
-			<button onClick={handleBackButtonClick}>Back</button>
-			{apiData !== null &&
-				apiData.map((poseObj) => (
-					<div key={poseObj.id}>
-						<PosesCard pose={poseObj} showFavorites={showFavorites} />
-					</div>
-				))}
+			{loggedIn && (
+				<>
+					<h3> {userEmail}</h3>
+					{apiData !== null &&
+						apiData.map((poseObj) => (
+							<div key={poseObj.id}>
+								<PosesCard pose={poseObj} showingFavorites={showingFavorites} />
+							</div>
+						))}
+				</>
+			)}
+			{!loggedIn && (
+				<>
+					<h3> To view your favorite poses, please log in or create an account to start saving your favorites.</h3>
+					<Link to="/auth">
+						<button className="btn btn-primary">Login or Sign Up</button>
+					</Link>
+				</>
+			)}
 		</div>
 	);
 }

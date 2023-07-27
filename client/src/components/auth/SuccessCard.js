@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Link } from "react-router-dom";
 // import "../css/success.css";
+import { useNavigate } from "react-router-dom";
 
 const SuccessCard = ({}) => {
+	const navigate = useNavigate();
 	return (
 		<div className="w-full h-full bg-white/30 flex justify-center items-center ">
 			<div className=" p-5 bg-white h-4/6  h-4/6 z-5 drop-shadow-2xl rounded-xl text-gray-900 border-2 border-gray-500 m-0 ">
 				<div className="title-inner  h-full  w-full text-center">
-					<Link to="/poseintro">
+					<Link to="/home">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -35,8 +37,9 @@ const SuccessCard = ({}) => {
 					<p className="font-mont text-primary4 text-xl text-center ">
 						You can find your saved poses at any time under "My Favorites"
 					</p>
+					<button onClick={() => navigate(-1)}>Nevermind, take me back! </button>
 					<Link
-						to="/poseintro"
+						to="/home"
 						className="text-primary5 font-semibold mt-5 bg-primary2/50 border-2 border-primary2 font-mont  p-3  shadow hover:bg-primary2/10 focus:ring-4 focus:ring-gray-200 text-xl  rounded-lg  ">
 						Return to the Home Page
 					</Link>

@@ -15,16 +15,22 @@ import Nav from "./components/nav/Nav";
 import { Outlet } from "react-router-dom";
 import Layout from "./components/SharedLayout";
 import PoseIntro from "./components/poses/PoseIntro";
-import PosesByCategory from "./components/poses/categories/PosesByCategory";
+
 import PosesCard from "./components/poses/categories/PosesCard";
 import PoseCategoryCard from "./components/poses/categories/PoseCategoryCard";
+import MoreInfo from "./components/poses/MoreInfo";
+import ChosenCategoryPoseList from "./components/poses/categories/ChosenCategoryPoseList";
+import PoseDifficultyCard from "./components/poses/difficulty/PoseDifficultyCard";
+import PosesByDifficulty from "./components/poses/difficulty/PosesByDifficulty";
+import PosesByBenefit from "./components/poses/benefits/PosesByBenefit";
+import SuccessCard from "./components/auth/SuccessCard";
 
 function App() {
-	const [loggedIn, setLoggedIn] = useState(false);
-	const [favoritePoses, setFavoritePoses] = useState(null);
-	const [cookies, setCookie, removeCookie] = useCookies(null);
-	const userEmail = cookies.Email;
-	const authToken = cookies.AuthToken;
+	// const [loggedIn, setLoggedIn] = useState(false);
+
+	// const [cookies, setCookie, removeCookie] = useCookies(null);
+	// const userEmail = cookies.Email;
+	// const authToken = cookies.AuthToken;
 
 	// const router = createBrowserRouter(
 	// 	createRoutesFromElements(
@@ -36,24 +42,6 @@ function App() {
 	// 	)
 	// );
 
-	// set login status
-	useEffect(() => {
-		if (authToken) {
-			getFavoritesData();
-			setLoggedIn(true);
-		}
-	}, []);
-
-	const getFavoritesData = async () => {
-		try {
-			const response = await fetch(`http://localhost:8000/favorite_poses/${userEmail}`);
-			const jsonFavoritesResponse = await response.json();
-			setFavoritePoses(jsonFavoritesResponse);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
 	//     ⋆｡ ﾟ ☁︎｡⋆｡ ﾟ ☾ ﾟ ｡⋆ ⋆｡  ✧ °  ｡ʚ 🍓 ɞ ｡° ✧ﾟ ☁︎｡⋆｡ ꒰    return below  ꒱   ﾟ ☾ ﾟ ｡⋆      ⋆｡ ﾟ ☁︎｡⋆｡ ﾟ ☾ ﾟ ｡⋆
 	return (
 		<BrowserRouter>
@@ -61,11 +49,21 @@ function App() {
 				{/* API CALLS in Layout */}
 				<Route element={<Layout />}>
 					<Route path="/" element={<Banner />} />
-					<Route path="/poseintro" element={<PoseIntro />} />
 					<Route path="/learn" element={<Learn />} />
 					<Route path="/favorites" element={<FavoritePosesList />} />
 					<Route path="/auth" element={<Auth />} />
-					<Route path="/posesbycategory" element={<PosesByCategory />} />
+
+					<Route path="/home" element={<PoseIntro />} />
+					{/* category routes */}
+
+					<Route path="/posecategorycard" element={<PoseCategoryCard />} />
+					<Route path="/posesbycategory/:category_name" element={<ChosenCategoryPoseList />} />
+					{/* difficulty routes */}
+					<Route path="/posesbydifficulty" element={<PosesByDifficulty />} />
+					{/* benefit route */}
+					<Route path="posesbybenefit" element={<PosesByBenefit />} />
+					<Route path="/posescard/:id" element={<PosesCard />} />
+					<Route path="/moreinfo" element={<MoreInfo />} />
 					<Route path="*" element={<Error />} />
 				</Route>
 			</Routes>

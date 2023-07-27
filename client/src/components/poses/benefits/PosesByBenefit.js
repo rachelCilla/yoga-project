@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import posesBenefitData from "../PoseData";
 import ChosenBenefitsPoseList from "./ChosenBenefitsPoseList";
+import { Link } from "react-router-dom";
 // import styles from "../../css/App.module.css";
 // index = index of poseBD objs= [{},{},{},{}]
 // object = object of poseBD = [{},{},{},{}]
@@ -9,7 +10,6 @@ import ChosenBenefitsPoseList from "./ChosenBenefitsPoseList";
 export default function PosesByBenefit({ showBenefit }) {
 	const [activeItem, setActiveItem] = useState(null);
 	const [activeSubCategory, setActiveSubCategory] = useState(null);
-
 	const toggleAccordion = (index) => {
 		if (activeItem === index) {
 			setActiveItem(null);
@@ -56,26 +56,27 @@ export default function PosesByBenefit({ showBenefit }) {
 				onMouseLeave={handleMouseLeave}>
 				Find Poses by Benefit
 			</h1>
-			{isHovered &&
-				posesBenefitData.map((object, index) => (
-					<div className="accordion-item" key={index}>
-						<div
-							className={`accordion-header ${activeItem === index ? "active" : ""}`}
-							onClick={() => toggleAccordion(index)}>
-							{Object.keys(object)}
-						</div>
+			<Link to="/home">
+				<button className="text-xl bg-blue-200">Back </button>
+			</Link>
 
-						{activeItem === index && (
-							<div className="accordion-content">
-								{Object.keys(object[Object.keys(object)]).map((subCategory) => (
-									<button key={subCategory} onClick={() => handleClick(subCategory)}>
-										{subCategory}
-									</button>
-								))}
-							</div>
-						)}
+			{posesBenefitData.map((object, index) => (
+				<div className="accordion-item" key={index}>
+					<div className={`accordion-header ${activeItem === index ? "active" : ""}`} onClick={() => toggleAccordion(index)}>
+						{Object.keys(object)}
 					</div>
-				))}
+
+					{activeItem === index && (
+						<div className="accordion-content">
+							{Object.keys(object[Object.keys(object)]).map((subCategory) => (
+								<button key={subCategory} onClick={() => handleClick(subCategory)}>
+									{subCategory}
+								</button>
+							))}
+						</div>
+					)}
+				</div>
+			))}
 
 			{activeSubCategory && activeItem !== null && (
 				<ChosenBenefitsPoseList
