@@ -24,26 +24,9 @@ import PoseDifficultyCard from "./components/poses/difficulty/PoseDifficultyCard
 import PosesByDifficulty from "./components/poses/difficulty/PosesByDifficulty";
 import PosesByBenefit from "./components/poses/benefits/PosesByBenefit";
 import SuccessCard from "./components/auth/SuccessCard";
-
+import IndividualMoreInfo from "./components/poses/difficulty/IndividualMoreInfo"
 function App() {
-	// const [loggedIn, setLoggedIn] = useState(false);
-
-	// const [cookies, setCookie, removeCookie] = useCookies(null);
-	// const userEmail = cookies.Email;
-	// const authToken = cookies.AuthToken;
-
-	// const router = createBrowserRouter(
-	// 	createRoutesFromElements(
-	// 		<Route path="/" element={<Root />}>
-	// 			<Route index element={<Banner />} />
-	// 			<Route path="/poseintro" element={<PoseIntro />} />
-	// 			<Route path="/learn" element={<Learn />} />
-	// 		</Route>
-	// 	)
-	// );
-
-	//     ⋆｡ ﾟ ☁︎｡⋆｡ ﾟ ☾ ﾟ ｡⋆ ⋆｡  ✧ °  ｡ʚ 🍓 ɞ ｡° ✧ﾟ ☁︎｡⋆｡ ꒰    return below  ꒱   ﾟ ☾ ﾟ ｡⋆      ⋆｡ ﾟ ☁︎｡⋆｡ ﾟ ☾ ﾟ ｡⋆
-	return (
+    return (
 		<BrowserRouter>
 			<Routes>
 				{/* API CALLS in Layout */}
@@ -63,7 +46,8 @@ function App() {
 					{/* benefit route */}
 					<Route path="posesbybenefit" element={<PosesByBenefit />} />
 					<Route path="/posescard/:id" element={<PosesCard />} />
-					<Route path="/moreinfo" element={<MoreInfo />} />
+                    <Route path="/moreinfo" element={<MoreInfo />} />
+                    <Route path="/moreinfoposes" element={<IndividualMoreInfo />} />
 					<Route path="*" element={<Error />} />
 				</Route>
 			</Routes>

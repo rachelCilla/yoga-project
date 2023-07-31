@@ -6,7 +6,8 @@ import yogaVideo from "../../images/yogaMain2.mp4";
 import VideoScreenshot from "../../images/screenshot.png";
 import { Link } from "react-router-dom";
 
-// import "./Banner.css";
+
+
 
 // varients
 const banner = {
@@ -31,7 +32,9 @@ const letterAnimation = {
 };
 
 function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, loggedIn, userEmail }) {
-	// const [playMarquee, setPlayMarquee] = useState(false);
+	
+    
+    // const [playMarquee, setPlayMarquee] = useState(false);
 	// const [isTransition, setIsTransition] = useState(false);
 
 	// useEffect(() => {

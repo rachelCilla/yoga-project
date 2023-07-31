@@ -1,15 +1,18 @@
 import React from "react";
-import PosesCard from "../categories/PosesCard";
-import IndividualPoseCard from "./IndividualPoseCard";
+import PosesCard from "./IndividualPoseCard";
 
 export default function PoseDifficultyCard({ handleBackButtonClick, difficultyData }) {
+  
+    const poses = difficultyData.poses
+    console.log("poses", poses)
 	return (
 		<div className="pose-difficulty-card">
 			<h1>{difficultyData.difficulty_level} Poses</h1>
 
-			{difficultyData.poses.map((pose) => (
+        
+			{poses.map((pose) => (
 				<div key={pose.id}>
-					<IndividualPoseCard pose={pose} />
+                    <PosesCard pose={pose} />
 				</div>
 			))}
 

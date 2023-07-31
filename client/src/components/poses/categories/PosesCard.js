@@ -8,8 +8,20 @@ import { useCookies } from "react-cookie";
 import { Link, useOutletContext } from "react-router-dom";
 // import { useParams } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
+import axios from "axios";
 
-export default function PosesCard({ pose, showingFavorites, categories }) {
+// props:
+// pose = poses arr of names from chosen benefits page(not ready for use in posesCard - must use API). 
+// categoriesPose = arr of objs from Chosen Categories Pose List(ready for use in PosesCard)
+
+export default function PosesCard({ difficultyPose, categoriesPose, pose, showingFavorites, categories }) {
+
+    // console.log("categoriesPose:", categoriesPose) // categoriesPose: {id: 47, category_name: 'Strengthening Yoga', english_name: 'Wheel', sanskrit_name_adapted: 'Urdhva Dhanurasana', sanskrit_name: 'Ūrdhva Dhanurāsana', …}
+// category_name: "Strengthening Yoga" , english_name : "Wheel" , id: 47, pose_benefits: ... etc. url_png: "https://res.cloudinary.com/dko1be2jy/image/upload/fl_sanitize/v1676483097/yoga-api/47_w2jsof.png"
+
+    // console.log("pose from chosen benefits:", pose) // "Triangle"
+
+
 	const [showMoreInfo, setShowMoreInfo] = useState(false);
 	const [poseData, setPoseData] = useState();
 	const [isLoading, setIsLoading] = useState(false);
@@ -18,50 +30,70 @@ export default function PosesCard({ pose, showingFavorites, categories }) {
 	const [error, setError] = useState(null);
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [openLogin, setOpenLogin] = useState(false);
-	const [removedFromFavorites, setRemovedFromFavorites] = useState(false);
+    const [removedFromFavorites, setRemovedFromFavorites] = useState(false);
+   const [updatedPoseData, setUpdatedPoseData] = useState();
+    const userEmail = cookies.Email;
 
-	// const location = useLocation();
-	// const { pose } = location.state;
-    // const { showingFavorites } = location.state;
+let [selectedPose, setSelectedPose] = useState({});
+    
 
-    // const logOutUser = () => {
-    //     setLoggedIn(false);
-    //     removeCookie("Email");
-    //     removeCookie("Password");
-    // };
-    // passing as url param
-    // const stringLogOutUser = logOutUser.toString();
 
-	// handles back buttons
-	// const { id: poseId } = useParams();
-	// const { poseList } = useOutletContext();
-	// const poseSelection = poseList.find((pose) => pose.id == poseId);
-	// console.log(poseSelection);
-//  const stringLogOutUser = logOutUser.toString();
-	const userEmail = cookies.Email;
-	// console.log("pose props:", pose);
+  // handles poses coming from chosen benefits pose list page (an array of pose names) but ignores if pose is coming from chosen categories pose list page (an array of pose objects)
+  useEffect(() => {
+    if (!categoriesPose && !pose.english_name) {
+      setIsLoading(true);
+      if (pose === "Child's Pose") {
+        axios
+          .get(`https://yoga-api-nzy4.onrender.com/v1/poses?id=10`)
+          .then((response) => {
+            setPoseData(response.data);
+            setIsLoading(false); // Set loading state to false once data is fetched
+          })
+          .catch((error) => {
+            console.log(error);
+            setPoseData(null);
+            setIsLoading(false); // Set loading state to false in case of error
+          });
+      } else if (!categoriesPose) {
+        axios
+          .get(`https://yoga-api-nzy4.onrender.com/v1/poses?name=${pose}`)
+          .then((response) => {
+            setPoseData(response.data);
+            setIsLoading(false); // Set loading state to false once data is fetched
+          })
+          .catch((error) => {
+            console.log(error);
+            setPoseData(null);
+            setIsLoading(false); // Set loading state to false in case of error
+          });
+      }
+    }
+  }, [pose]);
 
-	// check logged in
-	useEffect(() => {
-		if (cookies.Email) {
-			setLoggedIn(true);
-		} else {
-			setLoggedIn(false);
-		}
-	}, [userEmail]);
+  // Check if poseData is available and update selectedPose accordingly
+  useEffect(() => {
+    if (poseData) {
+      setSelectedPose(poseData);
+    } else if (categoriesPose) {
+      setSelectedPose(categoriesPose);
+    } else if (difficultyPose) {
+      setSelectedPose(difficultyPose);
+    }
+  }, [poseData, categoriesPose, difficultyPose]);
+
+  // Check logged in
+  useEffect(() => {
+    if (cookies.Email) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [userEmail]);
 
 	// login popup
 	const loginPopup = () => {
 		setOpenLogin(true);
 	};
-
-	// const openMoreInfo = () => {
-	// 	setshowingMoreInfo(true);
-	// };
-
-	// const closeMoreInfo = () => {
-	// 	setshowingMoreInfo(false);
-	// };
 
 	// REMOVE FROM FAVORITES-DB
 	const removeFromFavorites = async (pose_name) => {
@@ -74,7 +106,7 @@ export default function PosesCard({ pose, showingFavorites, categories }) {
 
 			const data = await response.json();
 			if (response.ok) {
-				setRemovedFromFavorites(true);
+				 setRemovedFromFavorites(true); 
 			} else {
 				setError(data.detail || "Failed to remove from favorites");
 			}
@@ -104,53 +136,21 @@ export default function PosesCard({ pose, showingFavorites, categories }) {
     };
     const stringAddToFavorites = addToFavorites.toString();
 
-	// 	if (!pose.english_name) {
-	// 		setIsLoading(true);
-	// 		if (pose === "Child's Pose") {
-	// 			axios.get(`https://yoga-api-nzy4.onrender.com/v1/poses?id=10`)
-	// 				.then((response) => {
-	// 					setPoseData(response.data);
-	// 					setIsLoading(false); // Set loading state to false once data is fetched
-	// 				})
-	// 				.catch((error) => {
-	// 					console.log(error);
-	// 					setPoseData(null);
-	// 					setIsLoading(false); // Set loading state to false in case of error
-	// 				});
-	// 		} else {
-	// 			axios.get(`https://yoga-api-nzy4.onrender.com/v1/poses?name=${pose}`)
-	// 				.then((response) => {
-	// 					setPoseData(response.data);
-	// 					setIsLoading(false); // Set loading state to false once data is fetched
-	// 				})
-	// 				.catch((error) => {
-	// 					console.log(error);
-	// 					setPoseData(null);
-	// 					setIsLoading(false); // Set loading state to false in case of error
-	// 				});
-	// 		}
-	// 	}
-	// }, [pose]);
-	// const poseId = poseData?.id || pose?.id;
-	// const poseImageUrl = poseData?.url_png || pose?.url_png;
-	// const pose.english_name = poseData?.english_name || pose?.english_name;
-	// const poseBenefits = poseData?.pose_benefits || pose?.pose_benefits;
-	// const poses = poseData || pose;
-	// console.log("poses:", poses);
-	// const poseId = pose.id;
-	// poses: {id: 28, category_name: 'Strengthening Yoga', english_name: 'Pyramid', sanskrit_name_adapted: 'Parsvottanasana', sanskrit_name: 'Pārśvottānāsana', …}
-
 	return (
 		<div className="poses-card">
-			{isLoading ? (
+            {isLoading
+                // || !updatedPoseData
+                ? (
 				<div>Loading Poses...</div>
-			) : (
-				!removedFromFavorites && (
+            ) : (
+                     !removedFromFavorites ? (
 					<Card>
-						<Card.Img variant="top" className="hidden" src={pose.url_png} alt="pose image" />
+						<Card.Img variant="top" className="hidden" src={selectedPose.url_png} alt="pose image" />
 						<Card.Body>
-							<Card.Title>{pose.english_name}</Card.Title>
-							<Card.Text>{pose.pose_benefits}</Card.Text>
+						{selectedPose && selectedPose.english_name && (
+  <Card.Title>{selectedPose.english_name}</Card.Title>
+)}
+							<Card.Text>{selectedPose.pose_benefits}</Card.Text>
 							{error && <p>{error}</p>}
 
 							{!loggedIn && (
@@ -166,40 +166,31 @@ export default function PosesCard({ pose, showingFavorites, categories }) {
 										<Button> Login or Sign Up</Button>
 									</Link>
 								</>
-							)}
-							{loggedIn && !showingFavorites && (
+                                )}
+                                
+							{loggedIn && !showingFavorites && selectedPose && selectedPose.english_name && (
                                     <Button variant="primary"
-                                        onClick={() => addToFavorites(pose.english_name)}
+                                        onClick={() => addToFavorites(selectedPose.english_name)}
                                     >
 									{addedToFavorites ? "Added Successfully!" : "Add to Favorites"}
 								</Button>
 							)}
-							{showingFavorites && (
-								<Button variant="danger" onClick={() => removeFromFavorites(pose.english_name)}>
+							{showingFavorites && selectedPose && selectedPose.english_name &&(
+								<Button variant="danger" onClick={() => removeFromFavorites(selectedPose.english_name)}>
 									{removedFromFavorites ? "Removed Successfully!" : "Remove from Favorites"}
 								</Button>
 							)}
-
-							{/* <Link to={`/moreinfo/${poseId}`}>More Info</Link> */}
-                                {/* <Link
-                                    to={{
-                                        pathname: `/moreinfo`,
-                                        state:{
-                                            pose ,
-                                            showingFavorites: showingFavorites
-                                            
-                                        },
-                                    }}
-                                        > */}
-                                	<Link to={`/moreinfo?addToFavorites=${encodeURIComponent(stringAddToFavorites)}`} state={{ pose, showingFavorites, loggedIn }}>
+                                	<Link to={`/moreinfo?addToFavorites=${encodeURIComponent(stringAddToFavorites)}`} state={{ selectedPose, showingFavorites, loggedIn }}>
   More Info
 </Link>
-							{/* <Button onClick={openMoreInfo}>More Info</Button> */}
+						 
 						</Card.Body>
 					</Card>
-				)
+            ):(
+            null
+            )   
 			)}
-			{/* <MoreInfo closeMoreInfo={closeMoreInfo} pose={poses} addToFavorites={addToFavorites} /> */}
+	
 		</div>
 	);
 }

@@ -14,11 +14,6 @@ export default function PoseCategoryCard() {
 		setShowPoseList(!showPoseList);
 		setSelectedCategoryIndex(categoryIndex);
 	};
-	// const data = useLocation();
-	// const categories = data.state;
-	// useEffect(() => {
-	// 	console.log("categories:", categories);
-	// }, [categories]);
 
 	return (
 		<div className="bg-blue-100">
@@ -32,14 +27,7 @@ export default function PoseCategoryCard() {
 					<Link to={`/posesbycategory/${category.category_name}`}>
 						<button>Click here for {category.category_name} poses</button>
 					</Link>
-					{/* <button onClick={() => handleButtonClick(index)}>Click here for {category.category_name} poses</button> */}
-					{/* {showPoseList && selectedCategoryIndex === index && (
-						<ChosenCategoryPoseList
-							handleBackButtonClick={handleButtonClick}
-							categories={categories}
-							categoryIndex={selectedCategoryIndex}
-						/>
-					)} */}
+					
 				</div>
 			))}
 		</div>

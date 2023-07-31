@@ -33,11 +33,11 @@ export default function ChosenCategoryPoseList() {
 	// Find the object where category_name matches categoryName
 	const selectedCategory = categories.find((category) => category.category_name === categoryName);
 	const poses = selectedCategory.poses;
-	// console.log("poses:", poses);
+
 
 	// Now selectedCategory contains the object where the category_name matches categoryName
-	console.log(selectedCategory);
-
+	// console.log(selectedCategory);
+console.log("poses from categories page:", poses)
 	return (
 		<div className="mt-32">
 			<Link className="" to="/posecategorycard">
@@ -46,8 +46,9 @@ export default function ChosenCategoryPoseList() {
 			{poses.map((pose) => (
 				<div key={pose.id}>
 					<PosesCard
-						categories={categories}
-						pose={pose}
+						// categories={categories}
+                        categoriesPose={pose}
+                    
 						// categoryIndex={categoryIndex}
 
 						// poseName={pose.english_name}

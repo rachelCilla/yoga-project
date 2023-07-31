@@ -25,9 +25,9 @@ export default function MoreInfo() {
 	const navigate = useNavigate();
 	// const loggedIn = useOutletContext();
 	const [cookies, setCookie, removeCookie] = useCookies(null);
-    const { selectedPose, showingFavorites, loggedIn } = location.state;
+    const { pose, showingFavorites, loggedIn } = location.state;
     
-    const pose = selectedPose;
+
     // const { pose } = data.pose;
 	// const showingFavorites = data.showingFavorites;
 	// const favoritesPose = data.favoritesPose;
