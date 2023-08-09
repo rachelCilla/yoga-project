@@ -6,9 +6,6 @@ import yogaVideo from "../../images/yogaMain2.mp4";
 import VideoScreenshot from "../../images/screenshot.png";
 import { Link } from "react-router-dom";
 
-
-
-
 // varients
 const banner = {
 	animate: {
@@ -32,9 +29,7 @@ const letterAnimation = {
 };
 
 function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, loggedIn, userEmail }) {
-	
-    
-    // const [playMarquee, setPlayMarquee] = useState(false);
+	// const [playMarquee, setPlayMarquee] = useState(false);
 	// const [isTransition, setIsTransition] = useState(false);
 
 	// useEffect(() => {
@@ -104,19 +99,28 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 	// };
 
 	return (
-		<>
+		<div className="container-fluid">
 			<>
-				<video autoPlay loop muted playsInline className="h-screen w-screen object-cover">
-					<source src={yogaVideo} type="video/mp4" /> Your browser does not support the video tag.
+				<video
+					autoPlay
+					loop
+					muted
+					playsInline
+					className="h-screen w-screen object-cover">
+					<source
+						src={yogaVideo}
+						type="video/mp4"
+					/>{" "}
+					Your browser does not support the video tag.
 				</video>
 
 				<div className="">
 					<div
-						className=" text-center 
-                         absolute top-70 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+						className="container text-center 
+                         absolute top-70 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
 						{/* WELCOME! TITLE */}
 						<motion.div
-							className=" tracking-widest font-poiret text-center text-9xl text-white font-semibold transition duration-500 hover:text-transparent hover:text-stroke-2   "
+							className=" tracking-widest font-poiret text-center text-7xl lg:text-8xl text-white font-semibold transition duration-500 hover:text-transparent hover:text-stroke-2   "
 							initial={{ opacity: 0, y: 80 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{
@@ -131,7 +135,7 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 
 						{!loggedIn && (
 							<Link to="/home">
-								<h5 className=" inline-block font-raleway text-white text-xlg border-2 border-white px-10 py-3 rounded-full mt-5 ">
+								<h5 className=" inline-block font-raleway text-white display-8 border-2 border-white px-10 py-3 rounded-full mt-5 ">
 									Ready to discover new poses?
 								</h5>
 							</Link>
@@ -139,7 +143,7 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 					</div>
 				</div>
 			</>
-		</>
+		</div>
 	);
 }
 

@@ -29,16 +29,16 @@ export default function () {
 	return (
 		<>
 			<>
-				<main className="p-8 relative w-screen h-screen bg-bottom bg-cover bg-[url('../images/kike-vega-F2qh3yjz6Jk-unsplash.jpg')] font-mont">
+				<main className="h-screen overflow-y-auto p-8 relative w-screen h-screen bg-bottom bg-cover bg-[url('../images/kike-vega-F2qh3yjz6Jk-unsplash.jpg')] font-mont">
 					{/* heading */}
 					<header className="mix-blend-multiply inline-block rounded shadow mx-auto absolute top-0 left-0 w-full text-center h-full custom-filter ">
-						<h1 className=" posesTitle mt-5 text-white text-8xl    bg-clip-text font-black  mix-blend-screen font-serif">
+						<h1 className=" posesTitle mt-24 text-white   text-6xl  lg:text-8xl  bg-clip-text font-black  mix-blend-screen font-serif ">
 							How would you like to discover?  {" "}
 						</h1>
 					</header>
 
 					{/* section  */}
-					<section className="absolute top-44 grid grid-cols-1 md:grid-cols-3 md:gap-10 left-1/2 transform -translate-x-1/2 w-10/12 ">
+					<section className="mt-5  absolute top-44 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-10 left-1/2 transform -translate-x-1/2 w-10/12 ">
 						{/* first white div */}
 						<article className="cardGrowGlow flex flex-col p-8 bg-primary1/80 rounded shadow border-2 border-primary2  ">
 							{/* circle 1 */}
@@ -104,7 +104,9 @@ export default function () {
 									level and progress at their own pace.
 								</p>
 							</div>
-							<Link to="/posesbydifficulty" className=" glass-btn rounded-full">
+							<Link
+								to="/posesbydifficulty"
+								className=" glass-btn rounded-full">
 								Search
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +142,9 @@ export default function () {
 								</p>
 							</div>
 							{/* search btn 3 */}
-							<Link to="/posesbybenefit" className=" glass-btn rounded-full ">
+							<Link
+								to="/posesbybenefit"
+								className=" glass-btn rounded-full ">
 								Search
 								<svg
 									xmlns="http://www.w3.org/2000/svg"

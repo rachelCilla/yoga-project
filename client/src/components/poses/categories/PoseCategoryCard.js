@@ -16,20 +16,40 @@ export default function PoseCategoryCard() {
 	};
 
 	return (
-		<div className="bg-blue-100">
-			<h1 className="mt-20"> find poses by category</h1>
-			<Link className="text-lg" to="/home">
+		<div className="bg-grayBlueDarker container mt-20 text-center">
+			<h1
+				className="pt-5 tracking-widest font-poiret font-semibold text-center text-5xl text-white transition duration-500 hover:text-transparent hover:text-stroke-2 "
+				initial={{ opacity: 0, y: 80 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{
+					ease: "easeInOut",
+					duration: 1,
+					delay: 0.4,
+				}}>
+				{/* <h1 className="font-poiret font-semibold text-white transition duration-500 hover:text-transparent hover:text-stroke-2 text-6xl"> */}
+				Find poses by category
+			</h1>
+			<Link
+				className="m-3 btn btn-secondary"
+				to="/home">
 				Back
 			</Link>
-			{categories.map((category, index) => (
-				<div key={category.category_name}>
-					<h3>{category.category_name}</h3>
-					<Link to={`/posesbycategory/${category.category_name}`}>
-						<button>Click here for {category.category_name} poses</button>
-					</Link>
-					
+
+			<div className="border border-secondary">
+				<div className="row">
+					{categories.map((category, index) => (
+						<div
+							className=" col-4  "
+							key={category.category_name}>
+							<Link
+								className="d-flex align-items-center justify-content-center border border-green"
+								to={`/posesbycategory/${category.category_name}`}>
+								<h3 className="btn btn-secondary">{category.category_name}</h3>
+							</Link>
+						</div>
+					))}
 				</div>
-			))}
+			</div>
 		</div>
 	);
 }

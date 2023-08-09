@@ -7,13 +7,17 @@ import lotusPainting from "../images/lotusPainting.jpg";
 
 export default function Learn() {
 	return (
-		<div className="learn-div bg-blue-200 " id="learn">
-			<h1>Learn</h1>
-
-			<img className="w-10 relative" src={lotusPainting} alt="lotus pose painting" />
+		<div class="">
 			<article>
-				<h1>What is Yoga?</h1>
-				<p>
+				<h1 className=" ">What is Yoga?</h1>
+				<div className="">
+					<img
+						className=""
+						src={lotusPainting}
+						alt="lotus pose painting"
+					/>
+				</div>
+				<p className=" ">
 					Yoga is a collection of practices and disciplines that originated in ancient India. It encompasses physical, mental, and
 					spiritual elements with the goal of controlling and calming the mind. Through these practices, yoga aims to cultivate a
 					state of detached awareness and alleviate worldly suffering. Yoga has evolved into various schools, practices, and goals
@@ -21,9 +25,8 @@ export default function Learn() {
 					modern forms.
 				</p>
 			</article>
-
 			<article>
-				<h1>The History of Yoga </h1>
+				<h1 className="">The History of Yoga </h1>
 				<p>
 					The history of yoga spans thousands of years and has its roots in ancient India. Yoga is a holistic practice that
 					combines physical postures, breathing exercises, meditation, and ethical principles to promote physical, mental, and
@@ -57,23 +60,27 @@ export default function Learn() {
 				</p>
 			</article>
 			<article>
-				<h1>Yoga and the Divine</h1>
+				<h2 className=" ">Yoga and the Divine</h2>
+				<img
+					src={sevenSages}
+					alt="Seven Sages"
+				/>
 				<p>
 					Perhaps one of the most popular subject of artworks in South Indian temples is that of Narasimha. The Narasimha avatar
 					of Vishnu, sitting cross-legged with a yoga strap around his legs is a reference to an ancient story from the Bhagavat
 					Purana. This sacred text relates the story of Vishnu who came down to earth, and taught his devotee Prahlad the art of
 					Bhakti Yoga. Bhakti Yoga would in turn make Prahlad invincible against the powers of his demon father.
 				</p>
-				<img src={narasimha} alt="narasimha" />
+
 				<p>
 					Dating back to the pre-vedic period, Yoga originally was a means of spiritually uniting with the Divine. It is believed
 					that Shiva taught the Seven Sages these super important secrets of passing from one world to another, without suffering.
 					A 17th century Pahari painting from the Chandigarh Museum illustrates this:
 				</p>
-				<img src={sevenSages} alt="Seven Sages" />
 			</article>
+
 			<article>
-				<h1>The Benefits of Yoga</h1>
+				<h2 className=" ">The Benefits of Yoga</h2>
 				<h3>
 					{" "}
 					Yoga offers a wide range of benefits for both the body and mind. Here are some of the key benefits of practicing yoga:
@@ -109,7 +116,7 @@ export default function Learn() {
 				</p>
 			</article>
 			<article>
-				<h1>Yoga Styles</h1>
+				<h2 className=" ">Yoga Styles</h2>
 				<h3>Hatha</h3>
 				<p>
 					Hatha is a style of yoga that focuses on physical postures (asanas), breathing techniques (pranayama), and relaxation.

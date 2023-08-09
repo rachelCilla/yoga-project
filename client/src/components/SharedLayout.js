@@ -14,8 +14,6 @@ export default function SharedLayout() {
 
 	// const userEmail = cookies.Email;
 
-	
-
 	// API - GET CATEGORIES
 	useEffect(() => {
 		axios.get("https://yoga-api-nzy4.onrender.com/v1/categories")
@@ -40,9 +38,12 @@ export default function SharedLayout() {
 	}, []);
 
 	return (
-		<>
-			<Nav />
-            <Outlet context={{ categories, poseList} } />
-		</>
+		<div className="container-fluid">
+			<Nav className="container-fluid" />
+			<Outlet
+				className="container-fluid"
+				context={{ categories, poseList }}
+			/>
+		</div>
 	);
 }
