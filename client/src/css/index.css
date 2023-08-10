@@ -176,3 +176,13 @@ nav {
     background-color: #d7d8d8;
     border: #98a7ae solid 1px;
 }
+
+/* Custom classes */
+.custom-col-4 {
+    width: 33.3333%;
+    /* 4 out of 12 columns */
+}
+
+.custom-min-h-100 {
+    min-height: 100px;
+}

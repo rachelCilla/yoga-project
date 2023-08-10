@@ -70,26 +70,34 @@ export default function FavoritePosesList({ handleBackButtonClick, favoritePose,
 	}, []);
 
 	return (
-		<div className="">
-			<h1 className="">Favorite Poses List</h1>
+		<div className="bg-grayBlueDarker w-screen h-screen">
+			<h1 className=" text-5xl text-white font-mont p-4 mt-20 text-center ">Favorite Poses List</h1>
 			{loggedIn && (
 				<>
 					<h3> {userEmail}</h3>
 					{apiData !== null &&
 						apiData.map((poseObj) => (
 							<div key={poseObj.id}>
-								<PosesCard pose={poseObj} showingFavorites={showingFavorites} />
+								<PosesCard
+									pose={poseObj}
+									showingFavorites={showingFavorites}
+								/>
 							</div>
 						))}
 				</>
 			)}
 			{!loggedIn && (
-				<>
-					<h3> To view your favorite poses, please log in or create an account to start saving your favorites.</h3>
-					<Link to="/auth">
-						<button className="btn btn-primary">Login or Sign Up</button>
+				<div className="flex flex-col">
+					<h3 className="text-xl text-white font-mont  p-3  ">
+						{" "}
+						To view your favorite poses, please log in or create an account to start saving your favorites.
+					</h3>
+					<Link
+						className="mx-auto"
+						to="/auth">
+						<button className="btn btn-secondary">Login or Sign Up</button>
 					</Link>
-				</>
+				</div>
 			)}
 		</div>
 	);

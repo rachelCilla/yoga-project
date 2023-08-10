@@ -79,11 +79,11 @@ export default function Auth({ auth, handleClose }) {
 	};
 
 	return (
-		<Backdrop className="z-10">
+		<Backdrop className="z-10 ">
 			{!showSuccess && (
 				<motion.div
 					onClick={(e) => e.stopPropagation()}
-					className=" font-mont relative   w-4/5 rounded-lg flex flex-col items-center justify-center bg-white  px-6 py-12 lg:px-8 "
+					className=" mt-20 font-mont relative   w-4/5 rounded-lg flex flex-col items-center justify-center bg-white  px-6 py-12 lg:px-8 "
 					variants={dropIn}
 					initial="hidden"
 					animate="visible"
@@ -97,7 +97,11 @@ export default function Auth({ auth, handleClose }) {
 							strokeWidth="1.5"
 							stroke="gray"
 							className="w-8 h-8 absolute top-0 right-0 transform m-3 hover:bg-gray-100 text-gray-800 border border-gray-400 rounded shadow">
-							<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M6 18L18 6M6 6l12 12"
+							/>
 						</svg>
 					</Link>
 					<motion.div
@@ -107,7 +111,11 @@ export default function Auth({ auth, handleClose }) {
 							duration: 3,
 						}}
 						className="w-2/6">
-						<Player loop autoplay src="https://lottie.host/2f38fc54-efd5-4ed7-8a6f-5cc5c5d3d70b/A7HDImtSdr.json" />
+						<Player
+							loop
+							autoplay
+							src="https://lottie.host/2f38fc54-efd5-4ed7-8a6f-5cc5c5d3d70b/A7HDImtSdr.json"
+						/>
 					</motion.div>
 					{/* SIGN IN DIV */}
 					<div className="sm:mx-auto sm:w-full sm:max-w-sm flex  justify-center m-0">
@@ -120,7 +128,9 @@ export default function Auth({ auth, handleClose }) {
 					<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
 						<form className="space-y-6">
 							<div>
-								<label htmlFor="email" className="block text-sm text-lg leading-6 text-gray-900">
+								<label
+									htmlFor="email"
+									className="block text-sm text-lg leading-6 text-gray-900">
 									Email address
 								</label>
 								<div className="mt-2">
@@ -138,7 +148,9 @@ export default function Auth({ auth, handleClose }) {
 							{/* PASSWORD */}
 							<div>
 								<div className="flex items-center justify-between">
-									<label htmlFor="password" className="block text-sm text-lg leading-6 text-blue-gray-800">
+									<label
+										htmlFor="password"
+										className="block text-sm text-lg leading-6 text-blue-gray-800">
 										Password
 									</label>
 

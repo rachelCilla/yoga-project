@@ -99,14 +99,14 @@ function Banner({ hideMainContent, setLoading, loading, toggleHideMainContent, l
 	// };
 
 	return (
-		<div className="container-fluid">
+		<div className="container-fluid ">
 			<>
 				<video
 					autoPlay
 					loop
 					muted
 					playsInline
-					className="h-screen w-screen object-cover">
+					className="  h-screen w-screen object-cover">
 					<source
 						src={yogaVideo}
 						type="video/mp4"
