@@ -4,6 +4,7 @@
 
 
 
+
 * {
 
     box-sizing: border-box;
@@ -185,4 +186,10 @@ nav {
 
 .custom-min-h-100 {
     min-height: 100px;
+}
+body {
+   
+    overflow-x: hidden !important; /* Prevent horizontal scrolling */
+    overflow-y: auto !important;   /* Enable vertical scrolling */
+    max-width: 100%;
 }

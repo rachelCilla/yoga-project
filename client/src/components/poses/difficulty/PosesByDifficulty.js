@@ -26,31 +26,38 @@ export default function PosesByDifficulty({ showDifficulty }) {
 	};
 
 	return (
-		<div className="poses-by-difficulty">
-			<h1>Poses by Difficulty</h1>
-
-			<>
-				{/* Update the Link component to use the state difficulty */}
-				{/* <Link to={`/${difficulty}`}> */}
+		<div className="bg-grayBlueDarker container mt-20 text-center ">
+			{/* HEADING */}
+			<h1 
+			className=" display-4 pt-5 font-mont font-semibold text-center text-white  "
+				initial={{ opacity: 0, y: 80 }}>Poses by Difficulty</h1>
+				<Link
+				className="m-3  px-5 btn mb-5"
+				style={{ backgroundColor: "#7E6765", color: "#FFFFFF" }}
+				to="/home">
+				Back
+			</Link>
+{/* BUTTONS */}
+			<div className="row">
+			
 				<button
-					className="block my-8 rounded bg-blue-700 px-10 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+				className="   py-2 btn btn-secondary pb"
 					onClick={() => handleButtonClick("beginner")}>
 					Beginner Poses
 				</button>
-				{/* </Link> */}
+	
 
-				{/* <button onClick={() => handleButtonClick("beginner")}>Beginner Poses</button> */}
-				<button
-					className="block  mb-8 rounded bg-blue-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+		<button
+				className=" py-2 btn btn-secondary "
 					onClick={() => handleButtonClick("intermediate")}>
 					Intermediate Poses
 				</button>
 				<button
-					className="block mb-8 rounded bg-blue-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+				className="   py-2 btn btn-secondary "
 					onClick={() => handleButtonClick("expert")}>
 					Expert Poses
 				</button>
-			</>
+			</div>
 
 			{/* POSE DIFFICULTY CARD rendering */}
 			{difficultyData && showPoseList && <PoseDifficultyCard handleBackButtonClick={handleButtonClick} difficultyData={difficultyData} />}

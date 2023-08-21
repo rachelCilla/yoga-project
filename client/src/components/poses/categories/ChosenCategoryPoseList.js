@@ -37,14 +37,22 @@ export default function ChosenCategoryPoseList() {
 
 	// Now selectedCategory contains the object where the category_name matches categoryName
 	// console.log(selectedCategory);
-console.log("poses from categories page:", poses)
+
 	return (
-		<div className="mt-32">
-			<Link className="" to="/posecategorycard">
+		<div className=" pt-24 bg-grayBlueDarker">
+			<div className="text-center">
+<h1 className="display-4 font-mont font-semibold text-center text-white">{categoryName}</h1>
+			<Link  to="/posecategorycard"
+			className="mb-3  px-5 py-2 btn "
+			style={{ backgroundColor: "#7E6765", color: "#FFFFFF" }}
+			>
 				Back to Categories
 			</Link>
+
+			</div>
+			<div className="row"> 
 			{poses.map((pose) => (
-				<div key={pose.id}>
+				<div className=" col-12 col-md-5 m-2 me-1" key={pose.id}>
 					<PosesCard
 						// categories={categories}
                         categoriesPose={pose}
@@ -57,6 +65,7 @@ console.log("poses from categories page:", poses)
 					/>
 				</div>
 			))}
+			</div>
 		</div>
 	);
 }

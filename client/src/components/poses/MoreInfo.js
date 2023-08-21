@@ -22,7 +22,7 @@ export default function MoreInfo() {
     
 	const data = location.state;
 	const [openLogin, setOpenLogin] = useState(false);
-	const navigate = useNavigate();
+	const navigate = useNavigate();Reads the following question then the re
 	// const loggedIn = useOutletContext();
 	const [cookies, setCookie, removeCookie] = useCookies(null);
     const { selectedPose, showingFavorites, loggedIn } = location.state;
@@ -103,21 +103,22 @@ export default function MoreInfo() {
 				show={true}
 				// onHide={() => closeMoreInfo()}
 			>
-				<Modal.Header closeButton>
-					<Modal.Title>More Info About {pose.english_name} Pose</Modal.Title>
+				<Modal.Header closeButton className="text-center mx-auto">
+					<Modal.Title>More info about <br/> <span className=" underline h2">{pose.english_name}</span>  Pose</Modal.Title>
 				</Modal.Header>
 
 				<Modal.Body>
-					<h6>
-						The Sanskrit name of {pose.english_name} Pose is {pose.sanskrit_name}
+					<h6 className="">
+						The Sanskrit name of {pose.english_name} Pose is 
+						<span className="font-bold"> {pose.sanskrit_name} </span>
 					</h6>
 					<h6>{pose.translation_name}</h6>
 					<h3>Pose Benefits:</h3>
 					<p>{pose.pose_benefits}</p>
-					<img src={pose.url_png} alt="" />
+					<img className=""src={pose.url_png} alt="" />
 					<h3>Pose Instructions:</h3>
 					<p>{pose.pose_description}</p>
-					<h6>For further assistance with {pose.english_name} pose, you can look:</h6>
+					<h6>For further assistance with {pose.english_name} pose, watch this tutorial:</h6>
 					<div>
 						{videoId && (
 							<iframe

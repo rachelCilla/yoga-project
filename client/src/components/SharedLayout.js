@@ -38,10 +38,10 @@ export default function SharedLayout() {
 	}, []);
 
 	return (
-		<div className="container-fluid">
-			<Nav className="container-fluid" />
+		<div className="">
+			<Nav className="" />
 			<Outlet
-				className="container-fluid"
+				className=""
 				context={{ categories, poseList }}
 			/>
 		</div>
