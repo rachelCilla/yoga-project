@@ -1,4 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+/node_modules
 node_modules/
 
 # dependencies
@@ -27,3 +28,6 @@ yarn-error.log*
 .vscode/settings.json
 
 
+
+# Local Netlify folder
+.netlify
