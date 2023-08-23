@@ -11,24 +11,22 @@ import { useCookies } from "react-cookie";
 export default function MoreInfo() {
 	const [videoId, setVideoId] = useState("");
 	const [addedToFavorites, setAddedToFavorites] = useState(false);
-	const [error, setError] = useState(null);
-    // log out user function
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const stringAddToFavorites = queryParams.get("addToFavorites");
-      // Convert the function string back to a function
-  const addToFavorites = eval(`(${stringAddToFavorites})`);
+	const [error, setError] = useState(null); // log out user function
+	const location = useLocation();
+	const queryParams = new URLSearchParams(location.search);
+	const stringAddToFavorites = queryParams.get("addToFavorites");
+	// Convert the function string back to a function
+	const addToFavorites = eval(`(${stringAddToFavorites})`);
 
-    
 	const data = location.state;
 	const [openLogin, setOpenLogin] = useState(false);
-	const navigate = useNavigate();Reads the following question then the re
+	const navigate = useNavigate();
 	// const loggedIn = useOutletContext();
 	const [cookies, setCookie, removeCookie] = useCookies(null);
-    const { selectedPose, showingFavorites, loggedIn } = location.state;
-    
-    const pose = selectedPose;
-    // const { pose } = data.pose;
+	const { selectedPose, showingFavorites, loggedIn } = location.state;
+
+	const pose = selectedPose;
+	// const { pose } = data.pose;
 	// const showingFavorites = data.showingFavorites;
 	// const favoritesPose = data.favoritesPose;
 	// const addToFavorites = data.addToFavorites;
@@ -67,7 +65,7 @@ export default function MoreInfo() {
 			await addToFavorites(pose.english_name);
 			setAddedToFavorites(true);
 		} catch (error) {
-            console.log("error", error);
+			console.log("error", error);
 			setError("Failed to add favorite pose");
 		}
 	};
@@ -76,15 +74,18 @@ export default function MoreInfo() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get("https://www.googleapis.com/youtube/v3/search", {
-					params: {
-						key: "AIzaSyA54q0EAFfvYQ_s1iZKcwo4sFSluUTjPXo",
-						q: `${pose.english_name} yoga pose guide`,
-						part: "snippet",
-						type: "video",
-						maxResults: 1,
-					},
-				});
+				const response = await axios.get(
+					"https://www.googleapis.com/youtube/v3/search",
+					{
+						params: {
+							key: "AIzaSyA54q0EAFfvYQ_s1iZKcwo4sFSluUTjPXo",
+							q: `${pose.english_name} yoga pose guide`,
+							part: "snippet",
+							type: "video",
+							maxResults: 1,
+						},
+					}
+				);
 
 				const video = response.data.items[0];
 				const videoId = video.id.videoId;
@@ -101,33 +102,58 @@ export default function MoreInfo() {
 			<Modal
 				dialogClassName="modal-100w"
 				show={true}
-				// onHide={() => closeMoreInfo()}
+				onHide={() => navigate(-1)}
 			>
-				<Modal.Header closeButton className="text-center mx-auto">
-					<Modal.Title>More info about <br/> <span className=" underline h2">{pose.english_name}</span>  Pose</Modal.Title>
+				<Modal.Header
+					closeButton
+					className="text-center mx-auto w-full flex "
+				>
+					<Modal.Title className="mx-auto w-100">
+						More info about <br />{" "}
+						<span className=" underline h2">
+							{pose.english_name}
+						</span>{" "}
+					</Modal.Title>
 				</Modal.Header>
 
 				<Modal.Body>
-					<h6 className="">
-						The Sanskrit name of {pose.english_name} Pose is 
-						<span className="font-bold"> {pose.sanskrit_name} </span>
+					<h6 className="text-center">
+						The Sanskrit name of {pose.english_name}{" "}
+						Pose is
+						<span className="font-bold ">
+							{" "}
+							{pose.sanskrit_name}{" "}
+						</span>
 					</h6>
-					<h6>{pose.translation_name}</h6>
+					<h6 className="text-center">
+						{pose.translation_name}
+					</h6>
+					<img
+						className="max-w-xs mx-auto"
+						src={pose.url_png}
+						alt=""
+					/>
 					<h3>Pose Benefits:</h3>
 					<p>{pose.pose_benefits}</p>
-					<img className=""src={pose.url_png} alt="" />
+
 					<h3>Pose Instructions:</h3>
 					<p>{pose.pose_description}</p>
-					<h6>For further assistance with {pose.english_name} pose, watch this tutorial:</h6>
+					<h6>
+						For further assistance with{" "}
+						{pose.english_name} pose, watch this
+						tutorial:
+					</h6>
 					<div>
 						{videoId && (
 							<iframe
+								className="mx-auto "
 								width="560"
 								height="315"
 								src={`https://www.youtube.com/embed/${videoId}`}
 								title="YouTube Video"
 								frameBorder="0"
-								allowFullScreen></iframe>
+								allowFullScreen
+							></iframe>
 						)}
 					</div>
 				</Modal.Body>
@@ -135,27 +161,50 @@ export default function MoreInfo() {
 				<Modal.Footer>
 					{error && <p>{error}</p>}
 					{/* <Link to={`/posesbycategory/${pose.category_name}`}> */}
-					<Button onClick={() => navigate(-1)} variant="secondary">
+					<Button
+						onClick={() => navigate(-1)}
+						variant="secondary"
+					>
 						Go back
 					</Button>
 
 					{!loggedIn && (
-						<Button type="button" className="btn btn-secondary" onClick={()=> setOpenLogin(true)}>
+						<Button
+							type="button"
+							className="btn btn-secondary"
+							onClick={() => setOpenLogin(true)}
+						>
 							Add to Favorites (Login Required)
 						</Button>
 					)}
 
 					{openLogin && (
 						<>
-							<p> Please login or signup to add favorites </p>
+							<p>
+								{" "}
+								Please login or signup to add
+								favorites{" "}
+							</p>
 							<Link to="/auth">
-								<Button> Login or Sign Up</Button>
+								<Button>
+									{" "}
+									Login or Sign Up
+								</Button>
 							</Link>
 						</>
 					)}
 					{loggedIn && !showingFavorites && (
-						<Button variant="primary" onClick={() => handleAddToFavorites(pose.english_name)}>
-							{addedToFavorites ? "Added Successfully!" : "Add to Favorites"}
+						<Button
+							variant="primary"
+							onClick={() =>
+								handleAddToFavorites(
+									pose.english_name
+								)
+							}
+						>
+							{addedToFavorites
+								? "Added Successfully!"
+								: "Add to Favorites"}
 						</Button>
 					)}
 					{/* <Button onClick={() => handleAddToFavorites(pose.english_name)} variant="primary">

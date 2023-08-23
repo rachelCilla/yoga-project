@@ -32,7 +32,7 @@ export default function Auth({ auth, handleClose }) {
 			opacity: 0,
 		},
 		visible: {
-			y: "10vh",
+			y: "1vh",
 			opacity: 1,
 			transition: {
 				duration: 3,
@@ -59,34 +59,39 @@ export default function Auth({ auth, handleClose }) {
 			setError("Passwords do not match");
 			return;
 		}
+		try {
+			const response = await fetch(
+				`${process.env.REACT_APP_SERVER_URL}/${endpoint}`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ email, password }),
+				}
+			);
 
-		const response = await fetch(
-			`${process.env.REACT_APP_SERVER_URL}/${endpoint}`,
-			{
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password }),
+			const data = await response.json();
+
+			if (data.detail) {
+				setError(data.detail);
+			} else {
+				setCookie("Email", data.email);
+				setCookie("AuthToken", data.token);
+				setShowSuccess(true);
+				// window.location.reload();
 			}
-		);
-
-		const data = await response.json();
-
-		if (data.detail) {
-			setError(data.detail);
-		} else {
-			setCookie("Email", data.email);
-			setCookie("AuthToken", data.token);
-			setShowSuccess(true);
-			// window.location.reload();
+		} catch (error) {
+			console.log("error", error);
+			setError("Failed to login/signup");
+			setShowSuccess(false);
 		}
 	};
 
 	return (
-		<Backdrop className="-z-10 h-100">
+		<Backdrop className="-z-10 ">
 			{!showSuccess && (
 				<motion.div
 					onClick={(e) => e.stopPropagation()}
-					className=" mb-6 font-mont relative  w-4/5 rounded-lg flex flex-col items-center justify-center bg-white  px-6"
+					className=" font-mont relative  w-4/5 rounded-lg flex flex-col items-center justify-center bg-white pb-6 px-6 h-5/6 mt-10 "
 					// style={{ maxHeight: "90vh" }}
 					variants={dropIn}
 					initial="hidden"
@@ -110,23 +115,26 @@ export default function Auth({ auth, handleClose }) {
 							/>
 						</svg>
 					</button>
+					{/* ANIMATION */}
 					<motion.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{
 							duration: 3,
 						}}
-						className="w-2/6"
+						className="w-60"
 					>
 						<Player
+							className="h-full"
 							loop
 							autoplay
 							src="https://lottie.host/2f38fc54-efd5-4ed7-8a6f-5cc5c5d3d70b/A7HDImtSdr.json"
 						/>
 					</motion.div>
+
 					{/* SIGN IN DIV */}
-					<div className=" overflow-y-auto sm:mx-auto sm:w-full sm:max-w-sm flex  justify-center m-0">
-						<h2 className="text-center text-3xl font-bold leading-9 tracking-tight text-grayBlueDark font-mont">
+					<div className="  sm:mx-auto sm:w-full sm:max-w-sm flex  justify-center m-0">
+						<h2 className="text-center text-2xl md:text-3xl font-bold leading-9 tracking-tight text-grayBlueDark font-mont">
 							{isLogin
 								? "Sign into your account"
 								: "Please sign up"}
@@ -134,7 +142,7 @@ export default function Auth({ auth, handleClose }) {
 					</div>
 
 					{/* EMAIL */}
-					<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
+					<div className="mt-1 md:mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
 						<form className="space-y-6">
 							<div>
 								<label
@@ -226,7 +234,7 @@ export default function Auth({ auth, handleClose }) {
 												: "signup"
 										)
 									}
-									className="font-mont flex w-full justify-center rounded-md bg-grayBlue px-3 py-1.5 text-md font-semibold leading-6 text-white shadow-sm hover:bg-grayBlueLight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+									className="font-mont flex w-full justify-center rounded-md bg-grayBlue px-3 py-1.5 md:text-md font-semibold md:leading-6 text-white shadow-sm hover:bg-grayBlueLight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 								>
 									{isLogin
 										? "Sign in"
@@ -252,12 +260,14 @@ export default function Auth({ auth, handleClose }) {
 						</div> */}
 						</form>
 						{isLogin && (
-							<p className="mt-3 text-center text-lg text-gray-500">
+							<p className="mt-3 text-center md:text-lg text-gray-500">
 								Not a member?
 								<a
 									href="#"
-									className="ps-1 font-semibold leading-6 text-grayBlueDark hover:text-grayBlueLight"
-									// onClick={() => setIsLogin(false)}
+									className="d-block md:d-static ps-1  font-semibold md:leading-6 text-grayBlueDark hover:text-grayBlueLight"
+									onClick={() =>
+										setIsLogin(false)
+									}
 								>
 									Create an account
 								</a>

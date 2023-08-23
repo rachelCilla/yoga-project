@@ -150,11 +150,11 @@ export default function PosesCard({
 	const stringAddToFavorites = addToFavorites.toString();
 
 	return (
-		<div className="">
+		<div className="align-items-stretch h-full">
 			{isLoading ? (
 				<div className="text-light">Loading Poses...</div>
 			) : !removedFromFavorites ? (
-				<Card>
+				<Card className="h-100">
 					<Card.Body>
 						{selectedPose &&
 							selectedPose.english_name && (

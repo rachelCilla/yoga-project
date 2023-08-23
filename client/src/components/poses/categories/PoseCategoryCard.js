@@ -7,7 +7,7 @@ import { Link, useOutletContext } from "react-router-dom";
 export default function PoseCategoryCard() {
 	const [showPoseList, setShowPoseList] = useState(false);
 	const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(null);
-
+	const [loading, setLoading] = useState(true);
 	const { categories } = useOutletContext();
 
 	const handleButtonClick = (categoryIndex) => {
@@ -15,10 +15,17 @@ export default function PoseCategoryCard() {
 		setSelectedCategoryIndex(categoryIndex);
 	};
 
+	useEffect(() => {
+		if (categories.length > 0) {
+			setLoading(false);
+		}
+	}, [categories]);
+
 	return (
-		<div className=" container-fluid bg-grayBlueDarker mt-20 text-center w-100">
+		<div className=" container-fluid bg-grayBlueDarker mt-20 text-center  h-screen">
+			{loading && <div>Loading...</div>}
 			<h1
-				className="pt-5 tracking-widest font-mont font-semibold text-center text-5xl text-white transition duration-500 hover:text-transparent hover:text-stroke-2 "
+				className="display-4 pt-5 font-mont font-semibold text-center text-white "
 				initial={{ opacity: 0, y: 80 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{
@@ -39,20 +46,23 @@ export default function PoseCategoryCard() {
 			</Link>
 
 			<div className="">
-				<div className="row " style={{ maxWidth: "100%" }}>
+				<div
+					className="row mx-auto md:mx-0 "
+					style={{ maxWidth: "100%" }}
+				>
 					{categories.map((category, index) => (
 						<div
 							style={{
 								minHeight: "100px",
 							}}
-							className=" col-xs-12 col-md-4 "
+							className=" col-xs-12 col-md-4 min-w-max "
 							key={category.category_name}
 						>
 							<Link
-								className="   no-underline  "
+								className="min-w-max   no-underline  "
 								to={`/posesbycategory/${category.category_name}`}
 							>
-								<h3 className=" btn btn-secondary p-3 ">
+								<h3 className="w-100 btn btn-secondary p-3 ">
 									{category.category_name}
 								</h3>
 							</Link>
