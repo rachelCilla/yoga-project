@@ -5,7 +5,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-export default function FavoritePosesList({ handleBackButtonClick, favoritePose, showFavorites }) {
+export default function FavoritePosesList({
+	handleBackButtonClick,
+	favoritePose,
+	showFavorites,
+}) {
 	const [cookies, setCookie, removeCookie] = useCookies(null);
 	const [apiData, setApiData] = useState(null);
 	const [showingFavorites, setShowingFavorites] = useState(true);
@@ -16,7 +20,9 @@ export default function FavoritePosesList({ handleBackButtonClick, favoritePose,
 
 	const getPoseData = (pose) => {
 		return axios
-			.get(`https://yoga-api-nzy4.onrender.com/v1/poses?name=${pose}`)
+			.get(
+				`https://yoga-api-nzy4.onrender.com/v1/poses?name=${pose}`
+			)
 			.then((response) => {
 				return response.data;
 			})
@@ -28,10 +34,13 @@ export default function FavoritePosesList({ handleBackButtonClick, favoritePose,
 
 	const getAllFavorites = async () => {
 		try {
-			const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/favorite_poses/${userEmail}`, {
-				method: "GET",
-				headers: { "Content-Type": "application/json" },
-			});
+			const response = await fetch(
+				`${process.env.REACT_APP_SERVER_URL}/favorite_poses/${userEmail}`,
+				{
+					method: "GET",
+					headers: { "Content-Type": "application/json" },
+				}
+			);
 			const data = await response.json();
 			return data;
 			// const dataNames = data.map((obj) => obj.pose_name);
@@ -55,10 +64,16 @@ export default function FavoritePosesList({ handleBackButtonClick, favoritePose,
 
 				const fetchAllPoseData = async () => {
 					// console.log('unique', uniqueDataNames)=['Boat', 'Half Boat', 'Chair', 'Crow', 'Dolphin', 'Side Plank', 'Plank']
-					const poseData = await Promise.all(uniqueDataNames.map((poseName) => getPoseData(poseName)));
+					const poseData = await Promise.all(
+						uniqueDataNames.map((poseName) =>
+							getPoseData(poseName)
+						)
+					);
 					//    console.log('posedata',poseData)
-					// ;=(7) [undefined, undefined, undefined, undefined, undefined, undefined, undefined]
-					const filteredPoseData = poseData.filter((pose) => pose !== null);
+
+					const filteredPoseData = poseData.filter(
+						(pose) => pose !== null
+					);
 					setApiData(filteredPoseData);
 				};
 
@@ -71,16 +86,20 @@ export default function FavoritePosesList({ handleBackButtonClick, favoritePose,
 
 	return (
 		<div className="bg-grayBlueDarker w-screen h-screen">
-			<h1 className=" text-5xl text-white font-mont p-4 mt-20 text-center ">Favorite Poses List</h1>
+			<h1 className=" text-5xl text-white font-mont p-4 mt-20 text-center ">
+				Favorite Poses List
+			</h1>
 			{loggedIn && (
 				<>
-					<h3> {userEmail}</h3>
+					<h3> {userEmail ? userEmail : ""}</h3>
 					{apiData !== null &&
 						apiData.map((poseObj) => (
 							<div key={poseObj.id}>
 								<PosesCard
 									pose={poseObj}
-									showingFavorites={showingFavorites}
+									showingFavorites={
+										showingFavorites
+									}
 								/>
 							</div>
 						))}
@@ -89,13 +108,14 @@ export default function FavoritePosesList({ handleBackButtonClick, favoritePose,
 			{!loggedIn && (
 				<div className="flex flex-col">
 					<h3 className="text-xl text-white font-mont  p-3  ">
-						{" "}
-						To view your favorite poses, please log in or create an account to start saving your favorites.
+						To view your favorite poses, please log in
+						or create an account to start saving your
+						favorites.
 					</h3>
-					<Link
-						className="mx-auto"
-						to="/auth">
-						<button className="btn btn-secondary">Login or Sign Up</button>
+					<Link className="mx-auto" to="/auth">
+						<button className="btn btn-secondary">
+							Login or Sign Up
+						</button>
 					</Link>
 				</div>
 			)}

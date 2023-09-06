@@ -26,11 +26,13 @@ app.post("/signup", async (req, res) => {
 	const salt = bcrypt.genSaltSync(10);
 	const hashed_password = bcrypt.hashSync(password, salt);
 	try {
+		console.log(email, hashed_password);
 		// save the user email + hashed password to the database
 		const signUp = await pool.query(
 			"INSERT INTO users (email, hashed_password) VALUES ($1, $2)",
 			[email, hashed_password]
 		);
+		console.log(signUp);
 		// return success response
 		const token = jwt.sign({ email }, "secret", { expiresIn: "1d" });
 		res.json({ email, token });
@@ -45,6 +47,7 @@ app.post("/signup", async (req, res) => {
 // user login
 app.post("/login", async (req, res) => {
 	const { email, password } = req.body;
+	console.log(email, password);
 	try {
 		const users = await pool.query(
 			"SELECT * FROM users WHERE email = $1",

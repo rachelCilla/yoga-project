@@ -3,7 +3,6 @@ import { useState } from "react";
 import FavoritePosesList from "../FavoritePosesList";
 import { useCookies } from "react-cookie";
 import Auth from "../auth/AuthModal";
-import yogaIcon from "../../images/icons8-prenatal-yoga-50.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { Outlet, Link } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
@@ -54,11 +53,9 @@ export default function Nav() {
 				ease: "easeInOut",
 				duration: 1,
 				delay: 0.6,
-			}}>
-			<MDBNavbar
-				className="py-4 "
-				expand="lg"
-				bgColor="">
+			}}
+		>
+			<MDBNavbar className="py-4 " expand="lg" bgColor="">
 				<MDBContainer fluid>
 					{/* <MDBNavbarBrand href="#">
 					<img
@@ -82,7 +79,8 @@ export default function Nav() {
 						type="button"
 						aria-expanded="false"
 						aria-label="Toggle navigation"
-						onClick={() => setShowNav(!showNav)}>
+						onClick={() => setShowNav(!showNav)}
+					>
 						<MDBIcon
 							icon="bars"
 							fas
@@ -90,9 +88,7 @@ export default function Nav() {
 						/>
 					</MDBNavbarToggler>
 
-					<MDBCollapse
-						navbar
-						show={showNav}>
+					<MDBCollapse navbar show={showNav}>
 						<MDBNavbarNav>
 							{/* <MDBNavbarItem>
 							<Link
@@ -111,10 +107,12 @@ export default function Nav() {
 							<MDBNavbarItem>
 								<Link
 									to="/"
-									className="no-underline">
+									className="no-underline"
+								>
 									<MDBNavbarLink
 										href="#"
-										className="text-white font-raleway text-lg  no-underline">
+										className="text-white font-raleway text-lg  no-underline"
+									>
 										Home
 									</MDBNavbarLink>
 								</Link>
@@ -123,16 +121,22 @@ export default function Nav() {
 							<MDBNavbarItem>
 								<Link
 									to="/home"
-									className="no-underline">
-									<MDBNavbarLink className="text-white font-raleway text-lg  no-underline">Poses</MDBNavbarLink>
+									className="no-underline"
+								>
+									<MDBNavbarLink className="text-white font-raleway text-lg  no-underline">
+										Poses
+									</MDBNavbarLink>
 								</Link>
 							</MDBNavbarItem>
 
 							<MDBNavbarItem>
 								<Link
 									to="/learn"
-									className="no-underline">
-									<MDBNavbarLink className="text-white font-raleway text-lg  ">Learn </MDBNavbarLink>
+									className="no-underline"
+								>
+									<MDBNavbarLink className="text-white font-raleway text-lg  ">
+										Learn{" "}
+									</MDBNavbarLink>
 								</Link>
 							</MDBNavbarItem>
 
@@ -140,23 +144,33 @@ export default function Nav() {
 								<Link
 									to="/favorites"
 									className="no-underline"
-									state={loggedIn}>
-									<MDBNavbarLink className="text-white font-raleway text-lg  ">My Favorites</MDBNavbarLink>
+									state={loggedIn}
+								>
+									<MDBNavbarLink className="text-white font-raleway text-lg  ">
+										My Favorites
+									</MDBNavbarLink>
 								</Link>
 							</MDBNavbarItem>
 
 							{loggedIn && (
 								<MDBNavbarItem className="  no-underline">
-									<MDBNavbarLink className="text-white font-raleway text-lg  ">Sign Out</MDBNavbarLink>
+									<MDBNavbarLink
+										onClick={signOut}
+										className="text-white font-raleway text-lg  "
+									>
+										Sign Out
+									</MDBNavbarLink>
 								</MDBNavbarItem>
 							)}
 							{!loggedIn && !auth && (
 								<MDBNavbarItem>
 									<Link
 										to="/auth"
-										className="no-underline">
+										className="no-underline"
+									>
 										<MDBNavbarLink className="text-white font-raleway text-lg  ">
-											Login or Sign Up
+											Login or Sign
+											Up
 										</MDBNavbarLink>
 									</Link>
 								</MDBNavbarItem>

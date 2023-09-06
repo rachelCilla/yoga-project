@@ -1,4 +1,7 @@
-CREATE DATABASE yoga_app;
+
+
+psql --host=db-yoga.ccz51mnvvobm.us-west-2.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=postgres
+postgres=> \c db_yoga
 
 CREATE TABLE favorite_poses(
     id VARCHAR(255) PRIMARY KEY,
@@ -11,6 +14,9 @@ CREATE TABLE users(
     email VARCHAR(255) UNIQUE,
     hashed_password VARCHAR(255)
 );
+
+
+psql "host=yoga-project-db.ccz51mnvvobm.us-west-2.rds.amazonaws.com port=5432 dbname=yoga-project-db user=admin password=pingas"
 
 --  UPDATE favorite_poses SET date = 'Wed May 17 2023 11:59:36 GMT-0600 (Mountain Daylight Time)' WHERE user_email = 'test@test.com';
 

@@ -54,12 +54,15 @@ export default function Auth({ auth, handleClose }) {
 	//     toggleHideMainContent();
 	// }
 	const handleSubmit = async (e, endpoint) => {
+		console.log("handle submit");
 		e.preventDefault();
 		if (!isLogin && password !== confirmPassword) {
 			setError("Passwords do not match");
+			console.log("passwords do not match");
 			return;
 		}
 		try {
+			console.log("endpoint", endpoint);
 			const response = await fetch(
 				`${process.env.REACT_APP_SERVER_URL}/${endpoint}`,
 				{
@@ -70,11 +73,13 @@ export default function Auth({ auth, handleClose }) {
 			);
 
 			const data = await response.json();
+			console.log("data", data);
 
 			if (data.detail) {
 				setError(data.detail);
 			} else {
 				setCookie("Email", data.email);
+				console.log("data.token", data.token);
 				setCookie("AuthToken", data.token);
 				setShowSuccess(true);
 				// window.location.reload();
@@ -216,9 +221,9 @@ export default function Auth({ auth, handleClose }) {
 								)}
 							</div>
 							{/* ERROR MESSAGE */}
+
 							{error && (
 								<p className="text-red-600  font-semibold">
-									{" "}
 									Error: {error}
 								</p>
 							)}
